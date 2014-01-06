@@ -1,0 +1,82 @@
+Alamo	3/28/2013	3/30/2013
+Autodesk Oregon	3/7/2013	3/9/2013
+BAE Systems	2/28/2013	3/2/2013
+Bayou	3/21/2013	3/23/2013
+Boilermaker	3/14/2013	3/16/2013
+Boston	3/21/2013	3/23/2013
+Bridgewater-Raritan	4/6/2013	4/7/2013
+Buckeye	3/28/2013	3/30/2013
+Central Washington	3/21/2013	3/23/2013
+Central Valley	3/1/2013	3/3/2013
+Chesapeake	4/11/2013	4/13/2013
+Colorado	4/4/2013	4/6/2013
+Crossroads 	4/4/2013	4/6/2013
+Dallas	3/21/2013	3/23/2013
+Detroit	3/15/2013	3/16/2013
+Festival de Robotique	3/14/2013	3/16/2013
+Connecticut	3/28/2013	3/30/2013
+FIRST Championship	4/24/2013	4/27/2013
+Archimedes	4/24/2013	4/27/2013
+Curie	4/24/2013	4/27/2013
+Galileo	4/24/2013	4/27/2013
+Newton	4/24/2013	4/27/2013
+Finger Lakes	2/28/2013	3/2/2013
+Grand Blanc	3/22/2013	3/23/2013
+Kansas City	3/14/2013	3/16/2013
+Toronto East	3/7/2013	3/9/2013
+Toronto West	3/28/2013	3/30/2013
+Gull Lake	3/8/2013	3/9/2013
+Hawaii	4/4/2013	4/6/2013
+Hatboro-Horsham	3/2/2013	3/3/2013
+Hub City	2/28/2013	3/2/2013
+Inland Empire	3/28/2013	3/30/2013
+Israel	3/10/2013	3/12/2013
+Kettering	3/1/2013	3/2/2013
+Las Vegas	4/4/2013	4/6/2013
+Lake Superior	3/7/2013	3/9/2013
+Lenape Seneca	3/23/2013	3/24/2013
+Livonia	3/29/2013	3/30/2013
+Los Angeles	3/21/2013	3/23/2013
+Lone Star	3/7/2013	3/9/2013
+Michigan	4/11/2013	4/13/2013
+Midwest	4/4/2013	4/6/2013
+Mid-Atlantic	4/11/2013	4/13/2013
+Minnesota 10000 Lakes	3/28/2013	3/30/2013
+Minnesota North Star	3/28/2013	3/30/2013
+Mount Olive 	3/23/2013	3/24/2013
+New York City	3/7/2013	3/9/2013
+North Carolina	3/14/2013	3/16/2013
+Northern Lights	3/7/2013	3/9/2013
+Oklahoma	3/28/2013	3/30/2013
+Orlando	3/7/2013	3/9/2013
+Palmetto	2/28/2013	3/2/2013
+Peachtree	3/14/2013	3/16/2013
+Phoenix	3/21/2013	3/23/2013
+Pittsburgh	3/14/2013	3/16/2013
+Pine Tree	4/4/2013	4/6/2013
+Queen City	3/21/2013	3/23/2013
+Razorback	4/4/2013	4/6/2013
+San Diego	3/7/2013	3/9/2013
+Sacramento	3/21/2013	3/23/2013
+SBPLI Long Island	4/4/2013	4/6/2013
+Seattle	3/28/2013	3/30/2013
+Silicon Valley	4/4/2013	4/6/2013
+Smoky Mountains	3/28/2013	3/30/2013
+St Joseph	3/15/2013	3/16/2013
+South Florida	3/28/2013	3/30/2013
+Chestnut Hill	3/15/2013	3/16/2013
+Bedford	4/5/2013	4/6/2013
+Spokane	4/4/2013	4/6/2013
+St. Louis	3/14/2013	3/16/2013
+Traverse City	3/1/2013	3/2/2013
+TCNJ	3/15/2013	3/16/2013
+Troy	3/29/2013	3/30/2013
+Utah	3/21/2013	3/23/2013
+Virginia	3/14/2013	3/16/2013
+Waterloo	3/21/2013	3/23/2013
+Washington DC	3/28/2013	3/30/2013
+Waterford	3/8/2013	3/9/2013
+West Michigan	3/22/2013	3/23/2013
+Western Canadian	4/4/2013	4/6/2013
+Wisconsin	3/21/2013	3/23/2013
+WPI	3/7/2013	3/9/2013

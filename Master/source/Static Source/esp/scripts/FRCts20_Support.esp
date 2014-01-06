@@ -1,0 +1,2501 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<% //Initialize Constants
+	DESKTOP = "desktop";
+	MOBILE = "mobile";
+	
+	M_PG_HOME = "SupportHome"; 
+	M_PG_TEAM = "Team";
+	M_PG_EVENTS_VIEW_REQUESTS = "EventsViewRequests";
+	M_PG_EVENTS_VIEW_HELP_OUT = "EventsViewHelpOut";
+	M_PG_SINGLE_EVENT_VIEW_HELP_OUT = "SingleEventViewHelpOut";
+	M_PG_SINGLE_EVENT_VIEW_REQUEST = "SingleEventViewRequest";
+	M_PG_TEAM_FORM = "TeamForm";
+	M_PG_REQUEST = "Request";
+	M_PG_REQUEST_FORM = "RequestForm";
+	M_PG_REPORT = "Reports";
+	M_PG_NOTIFICATIONS = "Notifications";
+	M_PG_TEAM_SEARCH = "TeamSearch";
+	
+	M_VIEW_REQUEST = "View=Request";
+	M_VIEW_HELPOUT = "View=HelpOut";
+	M_VIEW_SEARCH = "View=Search";
+
+	REQ_STATUS_OPEN = "Open";
+	REQ_STATUS_CLOSED = "Closed";
+	
+	SW_UNK = "unknown";
+	SW_LV = "LabVIEW";
+	SW_CPP = "Wind River, C++";
+	SW_JAVA = "NetBeans, Java";
+	SW_OTHER = "Other";
+	
+%>
+
+<% //Initialize Global Variables
+	vHost = form['Host']; //The IP or domain name of the server
+	vPage = form['Page']; //The Page that we are currently rendering
+	vPageType = "mobile"; //Specifies "mobile" or "desktop" rendering.  This is hardcoded because we only ever render the mobile view in Moonlight Parkway.
+	vDebug = form['Debug'] * 1; //Set this to true to turn on debug messages
+%>
+
+<% //Declare Global Functions
+function RenderHeader(){
+%>	
+	<title>NI Parkway</title>
+<%
+	if (vPageType == MOBILE){
+%>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no">
+		<link rel="apple-touch-icon-precomposed" type="image/png" href="https://s3.amazonaws.com/parkway_teamavatars/ParkwayIcon.png">
+		<link rel="icon" type="image/x-icon" href="https://s3.amazonaws.com/parkway_teamavatars/favicon.ico">
+		<link rel="stylesheet"  href="/frcts/static/esp/css/jquery.mobile.flatui.css" />
+		<script src="/frcts/static/esp/js/jquery.min.js" ></script>
+		<script src="/frcts/static/esp/js/jquery.mobile-1.3.1.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];3
+		  _gaq.push(['_setAccount', 'UA-37398003-1']);
+		  _gaq.push(['_setDomainName', 'niparkway.com']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
+<%
+	}
+	else if (vPageType == DESKTOP){
+		//Add JQuery Header info
+	}
+	else{ }
+}
+
+function RenderErrorMessage(Text){
+%>
+	<h5>Error: @@Text</h5>
+<%
+}
+
+function Debug(Text){
+	if (vDebug){
+%>
+	<h5>Debug: @@Text</h5>
+<%
+	}
+}
+%>
+
+<% //Declare Objects
+/** Object: Comment ******************************************************** 
+ *	Members:
+ *		Team -> The number of the Team that owns this Comment
+ *		Request -> The number of the Request that owns this Comment
+ *		Number -> The ID assigned to this Comment
+ *		Text -> The Comment text as input by the user
+ *		Author -> The name of the user who created this Comment
+ *		IsSolution -> True if this Comment is the solution to the owning Request
+ *	Functions:
+ *		Get -> Pulls all available ESP Variables from the LV ESP Engine
+ *		GetRequest -> Gets Published form data for 'Request' from ESP Engine
+ *		GetNumber -> Gets Published form data for 'CommentNumber' from ESP Engine
+ *		GetText -> Gets Published form data for 'Text' from ESP Engine
+ *		GetAuthor -> Gets Published form data for 'Author' from ESP Engine
+ *		GetIsSolution -> Gets Published form data for 'IsSolution' from ESP Engine
+ *		Clear -> Reinitializes the Object to its default values
+ ***************************************************************************/ 
+Debug("Interpreting Comment Object");
+function Comment(){
+	Debug("Comment Constructor");
+	var Comment = new Object();
+	var Comment.Team = 0;
+	var Comment.Request = 0;
+	var Comment.UniqueId = 0;
+	var Comment.Text = "";
+	var Comment.Author = "";
+	var Comment.IsSolution = false;
+	var Comment.TimeCreated = "";
+	
+	//Private Comment Functions
+	function GetTeam(){
+		Debug("Comment GetTeam Function");
+		this.Team = form['Team'];
+		return this.Team;
+	}
+	
+	function GetRequest(){
+		Debug("Comment GetRequest Function");
+		this.Request = form['Request'];
+		return this.Request;
+	}
+	
+	function GetUniqueId(){
+	Debug("Comment GetNumber Function");
+		this.UniqueId = form['CommentUniqueId'];
+		return this.UniqueId;
+	}
+	
+	function GetText(){
+		Debug("Comment GetText Function");
+		this.Text = form['Text'];
+		return this.Text;
+	}
+	
+	function GetAuthor(){
+		Debug("Comment GetAuthor Function");
+		this.Author = form['Author'];
+		return this.Author;
+	}
+	
+	function GetIsSolution(){
+		Debug("Comment GetIsSolution Function");
+		this.IsSolution = form['Solution'];
+		return this.IsSolution;
+	}
+	
+	function GetTimeCreated(){
+		Debug("Comment GetTimeCreated Function");
+		this.TimeCreated = form['TimeCreated'];
+		return this.TimeCreated;
+	}
+	
+	function Get(){
+		Debug("Comment Get Function");
+		this.GetTeam();
+		this.GetRequest();
+		this.GetUniqueId();
+		this.GetText();
+		this.GetAuthor();
+		this.GetIsSolution();
+		this.GetTimeCreated();
+		
+		return this;
+	}
+	
+	function Clear(){
+		Debug("Comment Clear Function");
+		this.Team = 0;
+		this.Request = 0;
+		this.UniqueId = 0;
+		this.Text = "";
+		this.Author = "";
+		this.IsSolution = False;
+		this.TimeCreated = "";
+		
+		return this;
+	}
+	
+	Comment.GetTeam = GetTeam;
+	Comment.GetRequest = GetRequest;
+	Comment.GetUniqueId = GetUniqueId;
+	Comment.GetText = GetText;
+	Comment.GetAuthor = GetAuthor;
+	Comment.GetIsSolution = GetIsSolution;
+	Comment.GetTimeCreated = GetTimeCreated;
+	Comment.Get = Get;
+	Comment.Clear = Clear;
+	
+	return Comment;
+}
+
+/** Object: Request ******************************************************** 
+ *	Members:
+ *		Team -> The number of the Team that owns this Request
+ *		Number -> The ID assigned to this Request
+ *		Description -> Main text field
+ *		Status -> The current state of the issue (open or closed)
+ *		OpenDate -> When the issue was opened
+ *		LastUpdate -> Last time the issue was changed
+ *		CloseDate -> Day the issue was closed if applicable
+ *		CommentCount -> The number of Comments this Request owns
+ *		Comments -> An array of Comment objects owned by this Request
+ *	Functions:
+ *		Get -> Pulls all available ESP Variables from the LV ESP Engine
+ *		GetTeam -> Gets Published form data for 'Team' from ESP Engine
+ *		GetNumber -> Gets Published form data for 'RequestNumber' from ESP Engine
+ *		GetDescription -> Gets Published form data for 'Description' from ESP Engine
+ *		GetStatus -> Gets Published form data for 'Status' from ESP Engine
+ *		GetOpenDate -> Gets Published form data for 'OpenDate' from ESP Engine
+ *		GetLastUpdateDate -> Gets Published form data for 'LastUpdateDate' from ESP Engine
+ *		GetCloseDate -> Gets Published form data for 'CloseDate' from ESP Engine
+ *		GetCommentCount -> Gets Published form data for 'CommentListLength' from ESP Engine
+ *		GetComments -> Gets Published form data for all 'Comment[i]' from ESP Engine
+ *		Clear -> Reinitializes the Object to its default values
+ ***************************************************************************/
+Debug("Interpreting Request Object");
+function Request(){
+	Debug("Request Constructor");
+	var Request = new Object();
+	var Request.UniqueId = 0;
+	var Request.TeamNumber = 0;
+	var Request.TeamUniqueId = 0;
+	var Request.Description = "";
+	var Request.Status = "Open";
+	var Request.OpenDate = "";
+	var Request.LastUpdateDate = "";
+	var Request.CloseDate = "";
+	var Request.CommentCount = 0;
+	var Request.Comments = new Array(1);
+	
+	function GetUniqueId(){
+          Debug("Request GetRequest Function");
+          this.UniqueId = form['RequestUniqueId'];
+          return this.UniqueId;
+     }
+
+     function GetTeamNumber(){
+          Debug("Request GetTeamNumber Function");
+          this.TeamNumber = form['TeamNumber'];
+          return this.TeamNumber;
+     }
+
+	      function GetTeamUniqueId(){
+          Debug("Request GetTeamUniqueId Function");
+          this.TeamUniqueId = form['TeamUniqueId'];
+          return this.TeamUniqueId;
+     }
+	 
+     function GetDescription(){
+          Debug("Request GetDescription Function");
+          this.Description = form['Description'];
+          return this.Description;
+     }
+	 
+	      function GetStatus(){
+          Debug("Request GetStatus Function");
+          this.Status = form['Status'];
+          return this.Status;
+     }
+	 
+	      function GetOpenDate(){
+          Debug("Request GetOpenDate Function");
+          this.OpenDate = form['OpenDate'];
+          return this.OpenDate;
+     }
+	 
+	      function GetLastUpdateDate(){
+          Debug("Request GetLastUpdateDate Function");
+          this.LastUpdateDate = form['LastUpdateDate'];
+          return this.LastUpdateDate;
+     }
+
+     function GetCloseDate(){
+          Debug("Request GetCloseDate Function");
+          this.CloseDate = form['CloseDate'];
+          return this.CloseDate;
+     }
+
+     function GetCommentCount(){
+          Debug("Request GetCommentCountFunction");
+          this.CommentCount = form['CommentListLength'];
+          this.CommentCount = this.CommentCount * 1;
+
+          return this.CommentCount;
+     }
+
+     function GetComments(){
+          Debug("Request GetComments Function");
+          this.CommentCount = form['CommentListLength'];
+          this.CommentCount = this.CommentCount * 1;
+
+          if (this.CommentCount > 0){
+               for(i = 0; i < this.CommentCount; i++){
+                    this.Comments[i] = Comment();
+                    this.Comments[i].Author = form['CommentAuthor' + i];
+                    this.Comments[i].Text = form['CommentText' + i];
+                    this.Comments[i].UniqueId = form['CommentUniqueId' + i];
+                    this.Comments[i].IsSolution = form['Solution' + i];
+					this.Comments[i].IsSolution = this.Comments[i].IsSolution * 1;
+               }
+          }
+          else {
+               Debug("No Comments for this Request");
+               this.Comments[0] = Comment();
+          }
+
+          return this.Comments;
+     }
+
+     function Get(){
+          Debug("Request Get Function");
+          this.GetUniqueId();
+          this.GetTeamNumber();
+          this.GetTeamUniqueId();
+          this.GetDescription();
+          this.GetStatus();
+          this.GetOpenDate();
+          this.GetLastUpdateDate();
+          this.GetCloseDate();
+          this.GetCommentCount();
+          this.GetComments();
+
+          return this;
+     }
+
+     function Clear(){
+          Debug("Request Clear Function");
+          this.UniqueId = 0;
+          this.TeamNumber = 0;
+          this.TeamUniqueId = 0;
+          this.Description = "";
+          this.Status = "Open";
+          this.OpenDate = "";
+          this.LastUpdateDate = "";
+          this.CloseDate = "";
+          this.CommentCount = 0;
+          this.Comments = new Array(1);
+
+          return this;
+     }
+
+	Request.GetUniqueId = GetUniqueId;
+	Request.GetTeamNumber = GetTeamNumber;
+	Request.GetTeamUniqueId = GetTeamUniqueId;
+	Request.GetDescription = GetDescription;
+	Request.GetStatus = GetStatus;
+	Request.GetOpenDate = GetOpenDate;
+	Request.GetLastUpdateDate = GetLastUpdateDate;
+	Request.GetCloseDate = GetCloseDate;
+	Request.GetCommentCount = GetCommentCount;
+	Request.GetComments = GetComments;
+	Request.Get = Get;
+	Request.Clear = Clear;
+	
+	return Request;
+}
+
+/** Object: Team ***********************************************************
+ *	Members:
+ *		Number -> The ID assigned to the team
+ *		Event -> The name of the event that owns this Team
+ *		RequestCount -> The number of requests owned by this Team
+ *		Requests -> gets an array of Requests owned by this Team
+ *		Software -> The type of SW this Team uses
+ *		CAN -> If they are using CAN
+ *	Functions:
+ *		Get -> Pulls all available ESP Variables from the LV ESP Engine
+ *		GetNumber -> Gets Published form data for 'TeamNumber' from ESP Engine
+ *		GetEvent -> Gets Published form data for 'Event' from ESP Engine
+ *		GetRequestCount -> Gets Published form data for 'RequestsListLength' from ESP Engine
+ *		GetRequests -> Gets Published form data for all 'Request[i]' from ESP Engine
+ *		GetSoftware -> Gets Published form data for 'SoftwareType' from ESP Engine
+ *		Clear -> Reinitializes the Object to it's default values
+ ***************************************************************************/
+Debug("Interpreting Team Object");
+function Team(){
+	Debug("Team Constructor");
+	var Team = new Object();
+	var Team.Number = 0;
+	var Team.UniqueId = 0;
+	var Team.NickName = "";
+	var Team.Event = "";
+	var Team.RequestCount = "";
+	var Team.Requests = new Array(1);
+	var Team.Software = "";
+	var Team.CAN = 0;
+	var Team.Vision = 0;
+	var Team.Kinect = 0;
+	var Team.Tags = "";
+	var Team.AvatarURL = "";
+	
+	
+	function GetNumber(){
+		Debug("Team GetRequest Function");
+		this.Number = form['TeamNumber'];
+		return this.Number;
+	}
+	
+	function GetUniqueId(){
+		Debug("Team GetRequest Function");
+		this.UniqueId = form ['TeamUniqueId'];
+		return this.UniqueId;
+	}
+	
+	function GetTeamNickName(){
+		Debug("Team GetNickName Function");
+		this.NickName = form['TeamNickName'];
+		return this.NickName;
+	}
+	
+	function GetEvent(){
+		Debug("Team GetEvent Function");
+		this.Event = form['Event'];
+		return this.Event;
+	}
+	
+	function GetRequestCount(){
+		Debug("Team GetRequestCount Function");
+		this.RequestCount = form['RequestListLength'];		
+		this.RequestCount = this.RequestCount * 1;
+		
+		return this.RequestCount;
+	}
+	
+	function GetRequests(){
+		Debug("Team GetRequests Function");
+		this.RequestCount = form['RequestListLength'];		
+		this.RequestCount = this.RequestCount * 1;
+		
+		if (this.RequestCount > 0){
+			for(i = 0; i < this.RequestCount; i++){
+				this.Requests[i] = Request();
+				this.Requests[i].UniqueId= form['RequestUniqueId' + i];
+				this.Requests[i].Description = form['Description' + i];
+				this.Requests[i].Status = form['Status' + i];
+			}
+		}else {
+			Debug("No Requests for this Team");
+			this.Requests[0] = Request();
+		}
+		
+		return this.Requests;
+	}
+	
+	function GetSoftware(){
+		Debug("Team GetSoftware Function");
+		this.Software = form['SoftwareType'];
+		return this.Software;
+	}
+	
+	function GetCAN(){
+		Debug("Team GetCAN Function");
+		this.CAN = form['CAN'];
+		this.CAN = this.CAN * 1;
+		return this.CAN;
+	}
+	
+	function GetVision(){
+		Debug("Team GetVision Function");
+		this.Vision = form['Vision'];
+		this.Vision = this.Vision * 1;
+		return this.Vision;
+	}
+	
+	function GetKinect(){
+		Debug("Team GetKinect Function");
+		this.Kinect = form['Kinect'];
+		this.Kinect = this.Kinect * 1;
+		return this.Kinect;
+	}
+	
+	function GetTeamTags(){
+		Debug("Team GetTeamTags Function");
+		this.TeamTags = form ['TeamTags'];
+		return this.TeamTags;
+	}
+	
+	function GetAvatarURL(){
+		Debug("Team GetAvatarURL Function");
+		this.AvatarURL = form['TeamAvatarURL'];
+		return this.AvatarURL;
+	}
+	
+	function Get(){
+		Debug("Team Get Function");
+		this.GetNumber();
+		this.GetUniqueId();
+		this.GetTeamNickName();
+		this.GetEvent();
+		this.GetRequestCount();
+		this.GetRequests();
+		this.GetSoftware();
+		this.GetCAN();
+		this.GetVision();
+		this.GetKinect();
+		this.GetAvatarURL();
+		
+		return this;
+	}
+	
+	function Clear(){
+		Debug("Team Clear Function");
+		this.Number = 0;
+		this.UniqueId = 0;
+		this.NickName = "";
+		this.Event = "";
+		this.RequestCount = "";
+		this.Requests = new Array(1);
+		this.Software = "";
+		this.CAN = 0;
+		this.Vision = 0;
+		this.Kinect = 0;
+		this.GetAvatarURL();
+		return this;
+	}
+	
+	Team.GetNumber = GetNumber;
+	Team.GetUniqueId = GetUniqueId;
+	Team.GetTeamNickName = GetTeamNickName;
+	Team.GetEvent = GetEvent;
+	Team.GetRequestCount = GetRequestCount;
+	Team.GetRequests = GetRequests;
+	Team.GetSoftware = GetSoftware;
+	Team.GetCAN = GetCAN;
+	Team.GetVision = GetVision;
+	Team.GetKinect = GetKinect;
+	Team.GetAvatarURL = GetAvatarURL;
+	Team.Get = Get;
+	Team.Clear = Clear;
+	
+	return Team;
+	Debug("End Team Constructor");
+}
+ 
+/** Object: Event ****************************************************
+ *	Members:
+ *		Location -> Where the Event is located
+ *		StartDate -> The Date that the Event starts
+ *		Teams -> All Teams in this Event
+ *		TeamCount -> The Number of Teams in this Event
+ *		OpenIssueCount -> The number of current open issue at an Event
+ *	Functions:
+ *		Get -> Pulls all available ESP Variables from the LV ESP Engine
+ *		GetLocation -> Gets Published form data for 'Location' from ESP Engine
+ *		GetStartDate -> Gets Published form data for 'StartDate' from ESP Engine
+ *		GetTeamCount -> Gets Published form data for 'TeamsListLength' from ESP Engine
+ *		GetTeams -> Gets Published form data for 'TeamNumber[i]' from ESP Engine 
+ *		GetOpenIssueCount -> Get the number of open issue for 'EventOpenIssueCount' from ESP Engine
+ *		Clear -> Reinitializes the Object to its default values
+ ***************************************************************************/
+Debug("Interpreting Event Object");
+function Event(){
+	Debug("Event Constructor");
+	var Event = new Object();
+	var Event.Location = "";
+	var Event.StartDate = "";
+	var Event.Teams = new Array(1);
+	var Event.RequestCount = 0;
+	var Event.Requests = new Array(1);
+	var Event.ClosedRequestCount = 0;
+	var Event.ClosedRequests = new Array(1);
+	var Event.TeamCount = 0;
+	var Event.OpenIssueCount = 0;
+	var Event.NotFoundStatus = 0;
+	
+	function GetLocation(){
+		Debug("Event GetLocation Function");
+		this.Location = form['Location'];
+		
+		return this.Location;
+	}
+	
+	function GetStartDate(){
+		Debug("Event GetStartDate Function");
+		this.StartDate = form['StartDate'];
+		
+		return this.StartDate;
+	}
+
+	function GetTeamCount(){
+		Debug("Event GetTeamCount Function");
+		this.TeamCount = form['TeamsListLength'];		
+		this.TeamCount = this.TeamCount * 1;
+		
+		return this.TeamCount;
+	}
+	
+	function GetTeams(){
+		Debug("Event GetTeams Function");
+		this.TeamCount = form['TeamsListLength'];
+		this.TeamCount = this.TeamCount * 1;
+		
+		if (this.TeamCount > 0){
+			for(i = 0; i < this.TeamCount; i++){
+				this.Teams[i] = Team();
+				this.Teams[i].Number = form['TeamNumber' + i];
+				this.Teams[i].UniqueId = form['TeamUniqueId' +i];
+			}
+		}
+		else {
+			Debug("No Teams in this Event");
+			this.Teams[0] = Team();
+		}
+		
+		return this.Teams;
+		Debug("End Event GetTeams Function");
+	}	
+
+	function GetRequestCount(){
+		Debug("Event GetRequestCount function");
+		this.RequestCount = form['EventRequestCount'];
+		this.RequestCount = this.RequestCount * 1;
+		
+		return this.RequestCount;
+	}
+	
+	function GetRequests(){
+		Debug("Event GetRequests function");
+		this.RequestCount = form['EventRequestCount'];
+		this.RequestCount = this.RequestCount * 1;
+		
+		if (this.RequestCount > 0 ){
+			for (i = 0; i < this.RequestCount; i++){
+				this.Requests[i] = Request();
+				this.Requests[i].UniqueId = form['RequestUniqueId' + i];
+				this.Requests[i].Description = form['RequestDescription' + i];
+				this.Requests[i].Team = form['RequestTeam' + i];
+			}
+		}
+		else {
+		Debug("No Requests at this event");
+		this.Requests[0] = Request();
+		}
+		
+		return this.Requests;
+	}
+	
+	function GetClosedRequestCount(){
+		Debug("Event GetClosedRequestCount function");
+		this.ClosedRequestCount = form['EventClosedRequestCount'];
+		this.ClosedRequestCount = this.ClosedRequestCount * 1;
+		
+		return this.ClosedRequestCount;
+	}
+	
+	function GetClosedRequests(){
+		Debug("Event GetClosedRequests function");
+		this.ClosedRequestCount = form['EventClosedRequestCount'];
+		this.ClosedRequestCount = this.ClosedRequestCount * 1;
+		
+		if (this.ClosedRequestCount > 0 ){
+			for (i = 0; i < this.ClosedRequestCount; i++){
+				this.ClosedRequests[i] = Request();
+				this.ClosedRequests[i].UniqueId = form['ClosedRequestUniqueId' + i];
+				this.ClosedRequests[i].Description = form['ClosedRequestDescription' + i];
+				this.ClosedRequests[i].Team = form['ClosedRequestTeam' + i];
+			}
+		}
+		else {
+		Debug("No ClosedRequests at this event");
+		this.ClosedRequests[0] = Request();
+		}
+		
+		return this.ClosedRequests;
+	}
+	
+	function GetOpenIssueCount(){
+		Debug("Event GetOpenIssueCount Function");
+		this.OpenIssueCount = form['EventOpenIssueCount'];
+		this.OpenIssueCount = this.OpenIssueCount * 1;
+		
+		return this.OpenIssueCount;
+	}
+
+	function GetNotFoundStatus(){
+		Debug("Universe GetNotFoundStatus");
+		this.NotFoundStatus = form['NotFoundStatus'];
+		this.NotFoundStatus = this.NotFoundStatus * 1;
+		
+		return this.NotFoundStatus;
+	}	
+			
+	
+	function Get(){
+		Debug("Event Get Function");
+		this.GetLocation();
+		this.GetStartDate();
+		this.GetTeamCount();
+		this.GetTeams();
+		this.GetRequestCount();
+		this.GetRequests();
+		this.GetClosedRequestCount();
+		this.GetClosedRequests();
+		this.GetOpenIssueCount();
+		this.GetNotFoundStatus();
+		
+		return this;
+	}
+	
+	function Clear(){
+		Debug("Event Clear function");
+		this.Location = "";
+		this.StartDate = "";
+		this.Divisions = new Array(1);
+		this.DivisionCount = 0;
+		this.Teams = new Array(1);
+		this.TeamCount = 0;
+		this.RequestCount = 0;
+		this.Requests = new Array(1);
+		this.ClosedRequestCount = 0;
+		this.ClosedRequests = new Array(1);
+		this.OpenIssueCount = 0;
+		this.NotFoundStatus = 0;
+		
+		return this;
+	}
+	
+	Event.GetLocation = GetLocation;
+	Event.GetStartDate = GetStartDate;
+	Event.GetTeamCount = GetTeamCount;
+	Event.GetTeams = GetTeams;
+	Event.GetRequestCount = GetRequestCount;
+	Event.GetRequests = GetRequests;
+	Event.GetClosedRequestCount = GetClosedRequestCount;
+	Event.GetClosedRequests = GetClosedRequests;
+	Event.GetOpenIssueCount = GetOpenIssueCount;
+	Event.GetNotFoundStatus = GetNotFoundStatus;
+	Event.Get = Get;
+	Event.Clear = Clear;
+	
+	return Event;
+}
+
+/** Object: SearchBrowser ****************************************************
+ *	Members:
+ *		LiveEvents -> An array of live event locations
+ *		LiveEventCount -> The number of live events
+ * 		EventSelection -> The previously selected event, stored in a cookie. 
+ *		SoftwareSelection -> The previous selected software stored in a cookie
+ *	Functions:
+ * 		GetLiveEventCount
+ *		GetLiveEvents
+ * 		GetEventSelection
+ *		GetSoftwareSelection
+ ***************************************************************************/
+Debug("Interpreting SearchBrowser Object");
+function SearchBrowser(){
+	Debug("SearchBrowser Constructor");
+	var SearchBrowser = new Object();
+	var SearchBrowser.LiveEventCount = 0;
+	var SearchBrowser.LiveEvents = new Array(1);
+	var SearchBrowser.EventSelection = "";
+	var SearchBrowser.SoftwareSelection = "";
+
+	function GetLiveEventCount(){
+		Debug("SearchBrowser GetLiveEventCount Function");
+		this.LiveEventCount = form['sbLiveEventCount'];
+		this.LiveEventCount = this.LiveEventCount * 1;
+		
+		return this.LiveEventCount;
+	}
+	
+	function GetLiveEvents(){
+		Debug("SearchBrowser GetLiveEvents Function");
+		this.LiveEventCount = form['sbLiveEventCount'];
+		this.LiveEventCount = this.LiveEventCount * 1;
+		
+		if (this.LiveEventCount > 0){
+			for (i = 0; i < this.LiveEventCount; i++){
+				this.LiveEvents[i] = Event();
+				this.LiveEvents[i].Location = form['sbLocation' + i];
+			}
+		}
+		else {
+			Debug("No Live Events");
+			this.LiveEvents[0] = Event();
+		}
+		
+		return this.LiveEvents;
+	}
+	
+	function GetEventSelection(){
+		Debug("SearchBrowser GetEventSelection Function");
+		this.EventSelection = form['sbEventSelection'];
+		
+		return this.EventSelection;
+	}
+
+	function GetSoftwareSelection(){
+		Debug("SearchBrowser GetSoftwareSelection Function");
+		this.SoftwareSelection = form['sbSoftwareSelection'];
+		
+		return this.SoftwareSelection;
+	}
+	
+	function Get(){
+		Debug("SearchBrowser Get Function");
+		this.GetLiveEventCount();
+		this.GetLiveEvents();
+		this.GetEventSelection();
+		this.GetSoftwareSelection();
+		
+		return this;
+	}
+	
+	function Clear(){
+		Debug("SearchBrowser Clear function");
+		this.LiveEventCount = 0;
+		this.LiveEvents = new Array(1);
+		this.EventSelection = "";
+		this.SoftwareSelection = "";
+		
+		return this;
+	}
+
+	SearchBrowser.GetLiveEventCount = GetLiveEventCount;
+	SearchBrowser.GetLiveEvents = GetLiveEvents;
+	SearchBrowser.GetEventSelection = GetEventSelection;
+	SearchBrowser.GetSoftwareSelection = GetSoftwareSelection;
+	SearchBrowser.Get = Get;
+	SearchBrowser.Clear = Clear;
+	
+	return SearchBrowser;
+}
+
+
+/** Object: Universe ****************************************************
+ *     Members:
+ *          Teams -> All Teams in the Universe
+ *          TeamCount -> The Number of Teams in the Universe
+ *          LiveEventCount -> The number of Live Events
+ *          NonLiveEventCount -> The number of NonLiveEvents
+ *          LiveEvents -> All Live Events
+ *          NonLiveEvents -> All NonLiveEvents
+ *          OpenIssueCount -> The number of current open issue in the Universe
+ *			NotFoundStatus -> Boolean indicating a search yielded zero results
+ *     Functions:
+ *          Get -> Pulls all available ESP Variables from the LV ESP Engine
+ *          GetTeamCount -> Gets Published form data for 'TeamsListLength' from ESP Engine
+ *          GetTeams -> Gets Published form data for 'TeamNumber[i]' from ESP Engine
+ *          GetLiveEventCount -> Gets the number of LiveEvents from 'LiveEventListLength' from ESP Engine
+ *          GetNonLiveEventCount -> Gets the number of NonLiveEvents from 'NonLiveEventListLength' from ESP Engine
+ *          GetLiveEvents -> Gets Published form data for 'LiveEvent[i]' from ESP Engine
+ *          GetNonLiveEvents -> Gets Published form data for 'NonLiveEvent[i]' from ESP Engine
+ *          GetOpenIssueCount -> Get the number of open issue for 'UniverseOpenIssueCount' from ESP Engine
+ *			GetNotFoundStatus -> Gets the status of a search result. 
+ *          Clear -> Reinitializes the Object to its default values
+ ***************************************************************************/
+Debug("Interpreting Universe Object");
+function Universe(){
+	Debug("Universe Constructor");
+	var Universe = new Object();
+	var Universe.TeamCount = 0;
+	var Universe.Teams = new Array(1);
+	var Universe.LiveEventCount = 0;
+	var Universe.NonLiveEventCount = 0;
+	var Universe.LiveEvents = new Array(1);
+	var Universe.NonLiveEvents = new Array(1);
+	var Universe.OpenIssueCount = 0;
+	var Universe.NotFoundStatus = 0;
+	
+	function GetTeamCount(){
+		Debug("Universe GetTeamCount Function");
+		this.TeamCount = form['TeamListLength'];
+		this.TeamCount = this.TeamCount * 1;
+
+		return this.TeamCount;
+	}
+	
+	function GetTeams(){
+		Debug("Universe GetTeams Function");
+		this.TeamCount = form['TeamListLength'];
+		this.TeamCount = this.TeamCount * 1;
+		
+		if (this.TeamCount > 0){
+			for(i = 0; i < this.TeamCount; i++){
+				this.Teams[i] = Team();
+				this.Teams[i].UniqueId = form['TeamUniqueId' + i];
+				this.Teams[i].Number = form['TeamNumber' + i];
+				this.Teams[i].Software = form['SoftwareType' + i];
+				this.Teams[i].Event = form['Event' + i];
+			}
+		}
+		else {
+			Debug("No Teams in this Event");
+			this.Teams[0] = Team();
+		}
+		
+		return this.Teams;
+	}
+	
+	function GetLiveEventCount(){
+		Debug("Universe GetLiveEventCount Function");
+		this.LiveEventCount = form['LiveEventListLength'];
+		this.LiveEventCount = this.LiveEventCount * 1;
+		
+		return this.LiveEventCount;
+	}
+	
+	function GetNonLiveEventCount(){
+		Debug("Universe GetNonLiveEvent Function");
+		this.NonLiveEventCount = form['NonLiveEventListLength'];
+		this.NonLiveEventCount = this.NonLiveEventCount * 1;
+		
+		return this.NonLiveEventCount;
+	}
+	
+	function GetLiveEvents(){
+		Debug("Universe GetLiveEvents Function");
+		this.LiveEventCount = form['LiveEventListLength'];
+		this.LiveEventCount = this.LiveEventCount * 1;
+		
+		if (this.LiveEventCount > 0){
+			for (i = 0; i < this.LiveEventCount; i++){
+				this.LiveEvents[i] = Event();
+				this.LiveEvents[i].Location = form['LiveEventLocation' + i];
+				this.LiveEvents[i].OpenIssueCount = form['LiveEventOpenIssueCount' + i];
+			}
+		}
+		else {
+			Debug("No Live Events");
+			this.LiveEvents[0] = Event();
+		}
+		
+		return this.LiveEvents;
+	}
+	
+	function GetNonLiveEvents(){
+		Debug("Universe GetNonLiveEvents Function");
+		this.NonLiveEventCount = form['NonLiveEventListLength'];
+		this.NonLiveEventCount = this.NonLiveEventCount * 1;
+		
+		if (this.NonLiveEventCount > 0){
+			for (i = 0; i < this.NonLiveEventCount; i++){
+				this.NonLiveEvents[i] = Event();
+				this.NonLiveEvents[i].Location = form['NonLiveEventLocation' + i];
+				this.NonLiveEvents[i].OpenIssueCount = form['NonLiveEventOpenIssueCount' + i];
+			}
+		}
+		else {
+			Debug("No Nonlive Events");
+			this.NonLiveEvents[0] = Event();
+		}
+		
+		return this.NonLiveEvents;	
+	}
+	
+	function GetOpenIssueCount(){
+		Debug("Universe GetOpenIssueCount Function");
+		this.OpenIssueCount = form['UniverseOpenIssueCount'];
+		this.OpenIssueCount = this.OpenIssueCount * 1;
+		
+		return this.OpenIssueCount;
+	}
+	
+	function GetNotFoundStatus(){
+		Debug("Universe GetNotFoundStatus");
+		this.NotFoundStatus = form['NotFoundStatus'];
+		this.NotFoundStatus = this.NotFoundStatus * 1;
+		
+		return this.NotFoundStatus;
+	}
+	
+	function Get(){
+		Debug("Universe Get Function");
+		this.GetTeamCount();
+		this.GetTeams();
+		this.GetLiveEventCount();
+		this.GetNonLiveEventCount();
+		this.GetLiveEvents();
+		this.GetNonLiveEvents();
+		this.GetOpenIssueCount();
+		this.GetNotFoundStatus();
+		
+		return this;
+	}
+	
+	function Clear(){
+		Debug("Universe Clear Function");
+		this.Teams = new Array(1);
+		this.TeamCount = 0;
+		this.LiveEventCount = 0;
+		this.NonLiveEventCount = 0;
+		this.LiveEvents = new Array(1);
+		this.NonLiveEvents = new Array (1);
+		this.OpenIssueCount = 0;
+		this.NotFoundStatus = 0;
+		
+		return this;
+	}
+	
+	Universe.GetTeamCount = GetTeamCount;
+	Universe.GetTeams = GetTeams;
+	Universe.GetLiveEventCount = GetLiveEventCount;
+	Universe.GetNonLiveEventCount = GetNonLiveEventCount;
+	Universe.GetLiveEvents = GetLiveEvents;
+	Universe.GetNonLiveEvents = GetNonLiveEvents;
+	Universe.GetOpenIssueCount = GetOpenIssueCount;
+	Universe.GetNotFoundStatus = GetNotFoundStatus;
+	
+	return Universe;
+}
+
+/** Object: PieChart ****************************************************
+ *	Members:
+ *		Location -> Which Event the Pie chart is describing
+ *		LVPercent -> Percentage of Teams using LabVIEW
+ *		CppPercent -> Percentage of Teams using C++
+ *		JavaPercent -> Percentage of Teams using Java
+ *		UnknownPercent -> Percetation of Teams we do not have data for or selected 'other' for software
+ *		TeamCount -> Number of total teams at an event
+ *		TeamsReporting -> Number of teams we have software info for
+ *	Functions:
+ *		No functions except Clear because this Object will never be called on its own.  
+ *		Only called from the UniverseReports object
+ ***************************************************************************/
+Debug("Interpreting PieChart Object");
+function PieChart(){
+	Debug("PieChart Constructor");
+	var PieChart = new Object();
+	var PieChart.Location = "";
+	var PieChart.LVPercent = "";
+	var PieChart.CppPercent = "";
+	var PieChart.JavaPercent = "";
+	var PieChart.OtherPercent = "";
+	var PieChart.TeamCount = 0;
+	var PieChart.TeamsReporting = 0;
+	
+	
+	function Clear(){
+		Debug("PieChart Clear function");
+		this.Location = "";
+		this.LVPercent = 0;
+		this.CppPercent = 0;
+		this.JavaPercent = 0;
+		this.OtherPercent = 0;
+		this.TeamCount = 0;
+		this.TeamsReporting = 0;
+		
+		return this;
+	}
+	
+
+	PieChart.Clear = Clear;
+	
+	return PieChart;
+}
+
+/** Object: LineChart ****************************************************
+ *	Members:
+ * 		StartDate
+ *		Location
+ * 		RequestsHourCount
+ * 		RequestsPerHour
+ *	Functions:
+ *		GetStartDate
+ *		GetLocation
+ *		GetRequestsHourCount
+ *		GetRequestsPerHour
+ ***************************************************************************/
+Debug("Interpreting LineChart Object");
+function LineChart(){
+	Debug("LineChart Constructor");
+	var LineChart = new Object();
+	var LineChart.StartDate = "";
+	var LineChart.Location = "";
+	var LineChart.RequestsPerHour = "";
+	
+	function GetStartDate(){
+		Debug("LineChart GetStartDate Function");
+		this.StartDate = form['StartDate'];
+		
+		return this.StartDate;
+	}
+	
+	function GetLocation(){
+		Debug("LineChart GetLocation Function");
+		this.Location = form['Location'];
+		
+		return this.Location;
+	}
+		
+	
+	function GetRequestsPerHour(){
+		Debug("LineChart GetRequestsPerHour Function");
+		this.RequestsPerHour = form['RequestsPerHour'];
+
+		return this.RequestsPerHour;
+	}
+	
+	function Get(){
+		Debug("LineChart Get Function");
+		this.GetStartDate();
+		this.GetLocation();
+		this.GetRequestsPerHour();
+		
+		return this;
+	}
+	
+	function Clear(){
+		Debug("LineChart Clear function");
+		this.StartDate = "";
+		this.Location = "";
+		this.RequestsPerHour = "";
+		
+		return this;
+	}
+	
+
+	LineChart.GetStartDate = GetStartDate;
+	LineChart.GetLocation = GetLocation;
+	LineChart.GetRequestsPerHour = GetRequestsPerHour;
+	LineChart.Get = Get;
+	LineChart.Clear = Clear;
+	
+	return LineChart;
+}
+
+/** Object: BarChart ****************************************************
+ *	Members:
+ *		CANValue -> The number of teams using CAN
+ *		VisionValue -> The number of teams using CAN
+ *		KinectValue -> The number of teams using CAN
+ *	Functions:
+ *		No functions except Clear because this Object will never be called on its own.  
+ *		Only called from the UniverseReports object
+ ***************************************************************************/
+Debug("Interpreting BarChart Object");
+function BarChart(){
+	Debug("BarChart Constructor");
+	var BarChart = new Object();
+	var BarChart.CANValue = "";
+	var BarChart.VisionValue = "";
+	var BarChart.KinectValue = "";
+	
+	
+	function Clear(){
+		Debug("BarChart Clear function");
+		this.CANValue = "";
+		this.VisionValue = "";
+		this.KinectValue = "";
+		
+		return this;
+	}
+
+	BarChart.Clear = Clear;
+	
+	return BarChart;
+}
+
+/** Object: ReportUniverse ****************************************************
+ *     Members:
+ *          PieCharts -> All PieCharts in the  ReportUniverse
+ *          PieChartCount -> The Number of PieCharts in the  ReportUniverse
+ *			LineChartCount -> The number of LineCharts to be displayed.  One per live events
+ *			LineCharts -> The Line Chart Data
+ 
+ *     Functions:
+ *          Get -> Pulls all available ESP Variables from the LV ESP Engine
+ *          GetPieChartCount -> Gets Published form data for 'PieChartCount' from ESP Engine
+ *          GetPieCharts -> Gets Published form data for 'PieChart[i]' from ESP Engine
+ *			GetLineChartCount
+ *			GetLineCharts
+ *          Clear -> Reinitializes the Object to its default values
+ ***************************************************************************/
+Debug("Interpreting ReportUniverse Object");
+function ReportUniverse(){
+	Debug("ReportUniverse Constructor");
+	var ReportUniverse = new Object();
+	var ReportUniverse.PieChartCount = 0;
+	var ReportUniverse.PieCharts = new Array(1);
+	var ReportUniverse.LineChartCount = 0;
+	var ReportUniverse.LineCharts = new Array(1);
+	var ReportUniverse.BarChart = BarChart();
+	Debug("End ReportUniverse Constructor");
+	
+	function GetPieChartCount(){
+		Debug("Universe GetPieChartCount Function");
+		this.PieChartCount = form['pPieChartCount'];
+		this.PieChartCount = this.PieChartCount * 1;
+
+		return this.PieChartCount;
+	}
+	
+	function GetPieCharts(){
+		Debug("Universe GetPieCharts Function");
+		this.PieChartCount = form['pPieChartCount'];
+		this.PieChartCount = this.PieChartCount * 1;
+		
+		if (this.PieChartCount > 0){
+			for(i = 0; i < this.PieChartCount; i++){
+				this.PieCharts[i] = PieChart();
+				this.PieCharts[i].Location = form['pLocation' + i];
+				this.PieCharts[i].LVPercent = form['pLVPercent' + i];
+				this.PieCharts[i].CppPercent = form['pCppPercent' + i];
+				this.PieCharts[i].JavaPercent = form['pJavaPercent' + i];
+				this.PieCharts[i].OtherPercent = form['pOtherPercent' + i];
+				this.PieCharts[i].TeamCount = form['pTeamCount' + i];
+				this.PieCharts[i].TeamCount = this.PieCharts[i].TeamCount * 1;
+				this.PieCharts[i].TeamsReporting = form['pTeamsReporting' + i];
+				this.PieCharts[i].TeamsReporting = this.PieCharts[i].TeamsReporting * 1;
+			}
+		}
+		else {
+			Debug("No Pie Charts!");
+			this.PieCharts[0] = PieChart();
+		}
+		
+		return this.PieCharts;
+	}
+	
+	function GetLineChartCount(){
+		Debug("ReportUniverse GetLineChartCount Function");
+		this.LineChartCount = form['lLineChartCount'];
+		this.LineChartCount = this.LineChartCount * 1;
+		
+		return this.LineChartCount;
+	}
+	
+	function GetLineCharts(){
+		Debug("ReportUniverse GetLineCharts Function");
+		this.LineChartCount = form['lLineChartCount'];
+		this.LineChartCount = this.LineChartCount * 1;
+		
+		if (this.LineChartCount > 0){
+			for (i = 0; i < this.LineChartCount; i++){
+				this.LineCharts[i] = LineChart();
+				this.LineCharts[i].StartDate = form['lStartDate' + i];
+				this.LineCharts[i].Location = form['lLocation' + i];
+				this.LineCharts[i].RequestsPerHour = form['lRequestsPerHour' + i];
+			}
+		}
+		else {
+			Debug("No LineCharts");
+			this.LineCharts[0] = LineChart();
+		}
+		
+		return this.LineCharts;
+	}
+
+	function GetBarChart(){
+		Debug("ReportUniverse GetBarChart Function");
+		this.BarChart.CANValue = form['CANValue'];
+		this.BarChart.VisionValue = form['VisionValue'];
+		this.BarChart.KinectValue = form['KinectValue'];
+		
+		return this.BarChart;
+	}
+	
+	function Get(){
+		Debug("ReportUniverse Get Function");
+		this.GetPieChartCount();
+		this.GetPieCharts();
+		this.GetLineChartCount();
+		this.GetLineCharts();
+		this.GetBarChart();
+		
+		return this;
+	}
+	
+	function Clear(){
+		Debug("ReportUniverse Clear Function");
+		this.PieCharts = new Array(1);
+		this.PieChartCount = 0;
+		this.LineChartCount = 0;
+		this.LineCharts = new Array(1);
+		this.BarChart = BarChart();
+		this.BarChart = BarChart();
+		
+		return this;
+	}
+	
+	ReportUniverse.GetPieChartCount = GetPieChartCount;
+	ReportUniverse.GetPieCharts = GetPieCharts;
+	ReportUniverse.GetLineChartCount = GetLineChartCount;
+	ReportUniverse.GetLineCharts = GetLineCharts;
+	ReportUniverse.GetBarChart = GetBarChart;
+	ReportUniverse.Get = Get;
+	ReportUniverse.Clear = Clear;
+	
+	return ReportUniverse;
+}
+
+Debug("End of Objects Code");
+%>
+
+<% //Mobile Page Render Functions
+Debug("Interpreting the Toolbar Function");
+function m_RenderToolbar(ToolbarTitle){
+%>
+	<div data-role="header" data-theme="c" data-position="fixed">
+		<h1>@@ToolbarTitle</h1>
+		<a href="/frcts/home" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+		<a href="#SearchBrowser" data-icon="search" data-iconpos="notext" data-rel="popup" data-transition="fade">Search</a>
+	</div><!-- /header -->
+<%
+}
+Debug("Interpreting the Footer Function");
+function m_RenderFooter(){
+%>
+	<div></div>
+<%
+}
+Debug("Interpreting the SearchBrowser Function");
+function m_RenderSearchBrowser(){
+	vSearchBrowser = SearchBrowser();
+	vSearchBrowser.Get();
+	//Set up variables for event and software selection in browser
+	
+%>
+<div data-role="popup" id="SearchBrowser" data-theme="c" class="ui-body" data-overlay-theme="a">
+		<form action="/frcts/search" method="get" data-ajax="false">
+			<fieldset data-role="controlgroup" >
+				<label for="search-basic"></label>
+				<input type="number" name="TeamNumberSearch" id="search-basic" value="" placeholder="Search by Team #" pattern="[0-9]*"/>
+			</fieldset>	
+			<button type="submit" name="submit" value="submit-value" data-theme="e">Search</button>
+			</form>
+		<div data-role="collapsible" data-collapsed="true" data-content-theme="c">
+			<h3>Search Browser</h3>
+			<form action="/frcts/teams" method="get" data-ajax="false">	
+				<fieldset data-role="controlgroup">
+					<legend>By Software and Location</legend>
+			     	<select name="select-choice-software" id="select-choice-software">
+						<option value="@@SW_UNK">@@SW_UNK</option>
+						<option value="@@SW_LV">@@SW_LV</option>
+						<option value="@@SW_CPP">@@SW_CPP</option>
+						<option value="@@SW_JAVA">@@SW_JAVA</option>
+						<option value="@@SW_OTHER">@@SW_OTHER</option>
+					</select>
+					<select name="select-choice-location" id="select-choice-location">
+<%
+					for (i = 0; i < vSearchBrowser.LiveEventCount; i++){
+%>	
+						<option value="@@vSearchBrowser.LiveEvents[i].Location">@@vSearchBrowser.LiveEvents[i].Location</option>
+<%
+					}
+%>
+					</select>
+				</fieldset>													
+				<button type="submit" data-theme="e" name="submit" value="submit-value">Browse</button>
+			</form>
+		</div> <!---collapsible-->
+</div> <!--/popup-->
+<%
+}
+Debug("Interpreting the NoLiveEventsPopUp Function");
+function m_RenderNoLiveEventsPopUp(){	
+%>
+<div data-role="popup" id="NoLiveEventsPopUp" data-theme="c" class="ui-body" data-overlay-theme="a">
+	<h3>No Live Events</h3>
+	<p>Please check NI Parkway later</p>
+</div> <!--/popup-->
+<%
+}
+Debug("Interpreting the Render Home Page Function");
+function m_RenderHomePage(){
+	Universe vUniverse = Universe();
+	vUniverse.GetOpenIssueCount();
+	vUniverse.GetLiveEventCount();
+	
+
+%>
+<div data-role="page" class="type-home">
+	<div data-role="content">
+<%
+	m_RenderSearchBrowser();
+%>	
+			<div id="Parkway-homeheader">
+				<h1 id="Parkway-logo">NI Parkway</h1>
+				The FIRST Live Support App
+			</div>
+
+			<ul data-role="listview" data-inset="true" data-theme="e" data-dividertheme="f">
+				<li><a href="/frcts/events?@@M_VIEW_REQUEST">Make Request</a></li>
+<%
+				if (vUniverse.OpenIssueCount > 0){
+%>				
+				<li><a href="/frcts/events?@@M_VIEW_HELPOUT" data-ajax="false">Help Out<span class="ui-li-count">@@vUniverse.OpenIssueCount</span></a></li>
+<%
+				}
+				else {
+%>
+				<li><a href="/frcts/events?@@M_VIEW_HELPOUT" data-ajax="false">Help Out</a></li>
+<%
+				}
+%>
+				
+			</ul>
+			
+			<div id="search">
+				<a href="#SearchBrowser" data-role="button" data-icon="search" data-rel="popup" data-transition="fade" data-position-to="window" data-iconshadow="false">Search Team Number</a>
+			</div>
+<%
+			if (vUniverse.LiveEventCount > 0){
+%>			
+			<div data-role="navbar">
+				<ul>
+					<li><a href="/frcts/notifications" >Notify Me</a></li>
+					<li><a href="/frcts/reports" data-ajax="false">Reports</a></li>
+				</ul>
+			</div>
+<%			
+			}
+			else {
+				m_RenderNoLiveEventsPopUp();
+%>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#NoLiveEventsPopUp" data-rel="popup">Notify Me</a></li>
+					<li><a href="#NoLiveEventsPopUp" data-rel="popup">Reports</a></li>
+				</ul>
+			</div>	
+<%			
+			}
+%>			
+
+		<div id="pblv-log">
+			<div id="Parkway-homeheader">				
+				<h3 id="LV-logo"><p>Powered By LabVIEW</p></h3>
+			</div>
+		</div>
+	</div> <!--/content-->
+<%
+	m_RenderFooter()
+%>
+</div><!--/page-->
+
+<%
+}
+
+Debug("Interpreting the Render Team Page Function");
+function m_RenderTeamPage(){
+	var vTeam = Team();
+	vTeam.Get();
+	
+	//Set up variables to select team's software within the form
+	vSW_LVSelect = "";
+	vSW_CPPSelect = "";
+	vSW_JAVASelect = "";
+	vSW_OTHERSelect = "";
+	if (vTeam.Software == SW_LV){
+		vSW_LVSelect = "checked";
+	}
+	if (vTeam.Software == SW_CPP){
+		vSW_CPPSelect = "checked";
+	}
+	if (vTeam.Software == SW_JAVA){
+		vSW_JAVASelect = "checked";
+	}
+	if (vTeam.Software == SW_OTHER){
+		vSW_OTHERSelect = "checked";
+	}
+	
+	//Set up variables for selected advanced component sliders
+	vCANSelect = "";
+	vVisionSelect ="";
+	vKinectSelect = "";
+	var vAlert = "";
+	
+	if (vTeam.CAN == 1){
+		vCANSelect = "selected";
+	}
+	if (vTeam.Vision == 1){
+		vVisionSelect = "selected";
+	}
+	if (vTeam.Kinect == 1){
+		vKinectSelect = "selected";
+	}
+	
+%> 
+
+<div data-role="page" class="type-interior">
+<%
+	m_RenderToolbar("NI Parkway");
+%>
+	<div data-role="content">
+<%
+	m_RenderSearchBrowser();
+%>	
+		<div class="ui-grid-a">	
+
+			<div class="ui-block-a">
+				<a href="#UpdateAvatar" data-rel="popup">
+					<img class ="team-avatar" clip-path="url(#clipping)" src="@@vTeam.AvatarURL" alt="Team Icon" />
+				</a>
+				<br/>
+				<a href="#RequestHelp" data-rel="popup" data-role="button" data-inline="true" data-theme="e" data-mini="true">Request Help!</a>
+			</div>
+			<div class="ui-block-b">
+				<h2>Team @@vTeam.Number</h2>
+				<h3>@@vTeam.NickName</h3>
+				<h3>@@vTeam.Event</h3>
+			</div>			
+		</div><!-- /grid-a -->
+		
+		<div data-role="popup" id="RequestHelp" class="ui-body" data-overlay-theme="a">
+			<h3>Request Help!</h3>
+			<form action="/frcts/requests" method="POST">
+			<fieldset>	
+				<div data-role="fieldcontainer">
+					<textarea name="RequestText" id="textarea-c" cols="50"></textarea>
+					<input type="hidden" name="EventName" id="EventName" value="@@vTeam.Event" />
+					<input type="hidden" name="select-choice-0" id="TeamUniqueId" value="@@vTeam.UniqueId" />
+				</div>
+			<button type="submit" data-theme="e" name="submit" value="submit-value">Submit</button>
+			</fieldset>
+			</form>	
+		</div><!--/popup-->
+		<div data-role="popup" id="UpdateAvatar" class="ui-body" data-overlay-theme="a">
+			<h3>Update Team Avatar</h3>
+			<form form action="/frcts/teams/@@vTeam.UniqueId" method="POST" enctype="multipart/form-data" data-ajax="false">
+				<div data-role="fieldcontainer">
+					<input type="file" id="teamimage" name="teamimage">
+				</div>
+				<button type="submit" data-theme="e" name="submit" value="submit-value">Submit</button>
+			</form>	
+		</div><!--/popup-->
+		
+				<form action="/frcts/teams/@@vTeam.UniqueId" method="POST" enctype="multipart/form-data" data-ajax="false">
+					<fieldset data-role="controlgroup">
+						<legend><h3>Software</h3></legend>
+							<input type="radio" name="SWType" id="radio-choice-1" value="@@SW_LV" @@vSW_LVSelect />
+							<label for="radio-choice-1">@@SW_LV</label>
+					
+							<input type="radio" name="SWType" id="radio-choice-2" value="@@SW_CPP" @@vSW_CPPSelect />
+							<label for="radio-choice-2">@@SW_CPP</label>
+					
+							<input type="radio" name="SWType" id="radio-choice-3" value="@@SW_JAVA" @@vSW_JAVASelect />
+							<label for="radio-choice-3">@@SW_JAVA</label>
+					
+							<input type="radio" name="SWType" id="radio-choice-4" value="@@SW_OTHER" @@vSW_OTHERSelect  />
+							<label for="radio-choice-4">@@SW_OTHER</label>
+					</fieldset>
+					<legend><h3>Advanced Components</h3></legend>
+					<ul data-role="listview" data-inset="true">
+						<li data-role="fieldcontain">
+							<label for="flip-1">CAN?</label>
+							<select name="CANflip" id="flip-1" data-role="slider">
+								<option value="false" >No</option>
+								<option value="true" @@vCANSelect>Yes</option>
+							</select> 
+						</li>
+						<li data-role="fieldcontain">
+							<label for="flip-2">Vision?</label>
+							<select name="Visionflip" id="flip-2" data-role="slider">
+								<option value="false">No</option>
+								<option value="true" @@vVisionSelect>Yes</option>
+						</select>
+						</li>
+						<li data-role="fieldcontain"> 
+							<label for="flip-3">Kinect?</label>
+							<select name="Kinectflip" id="flip-3" data-role="slider">
+								<option value="false">No</option>
+								<option value="true" @@vKinectSelect>Yes</option>
+						</select> 
+						</li>
+					</ul>
+					<legend><h3>Updated for 2014?</h3></legend>
+					<ul data-role="listview" data-inset="true">
+						<li data-role="fieldcontain">
+							<label for="flip-1">Team Data</label>
+							<select name="flip-1" id="flip-1" data-role="slider">
+								<option value="true" selected>No</option>
+								<option value="false">Yes</option>
+							</select> 
+						</li>
+					</ul>
+					<button type="submit" data-theme="e" name="submit" value="submit-value">Update Data</button>
+				</form>	
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="c" data-content-theme="c">
+
+					<h3>Team @@vTeam.Number's Requests</h3>
+					<!--code to list other requests goes here-->
+					<ul data-role="listview">
+<%
+						for (i = 0; i < vTeam.RequestCount; i++){
+							if (vTeam.Requests[i].Status == REQ_STATUS_OPEN){
+								vAlert = "alert";
+							}
+							else {
+								vAlert = "arrow-r";
+							}
+%>						
+						<li data-icon="@@vAlert"><a href="/frcts/requests/@@vTeam.Requests[i].UniqueId">
+							<p><strong>@@vTeam.Requests[i].UniqueId</strong></p>
+							<p>@@vTeam.Requests[i].Description</p>
+							</a>
+						</li>
+<%
+						}
+%>						
+					</ul>
+			</div>
+	</div><!-- /content -->
+
+<%
+	m_RenderFooter();
+%>
+
+</div><!-- /page -->
+<%
+}
+//Resource: /events?View=Request
+Debug("Interpreting the Render Events View Request Page Function");
+function m_RenderEventsViewRequest(){
+	Universe vUniverse = Universe();
+	vUniverse.GetLiveEvents();
+	vUniverse.GetNonLiveEvents();
+	vUniverse.GetLiveEventCount();
+	vUniverse.GetNonLiveEventCount();
+%>
+	<div data-role="page" class="type-interior" data-add-back-btn="true">
+<%
+	m_RenderToolbar("Pick Your Event")
+%>
+	<div data-role="content">
+<%
+	m_RenderSearchBrowser();
+				if (vUniverse.LiveEventCount == 0){
+%>				
+				<h2>No Live Events</h2>
+<%
+				}
+				else {				
+%>
+				<h2>Live Events</h2>
+<%
+				}
+%>
+					<ul data-role="listview" data-inset="true" data-theme="e">
+<%
+					for (i = 0; i < vUniverse.LiveEventCount; i++){
+%>					
+						<li><a href="/frcts/events/@@vUniverse.LiveEvents[i].Location?@@M_VIEW_REQUEST">@@vUniverse.LiveEvents[i].Location</a></li>
+<%
+					}
+%>						
+					</ul>		
+
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="c" data-content-theme="c">
+
+					<h3>All other events</h3>
+
+					<ul data-role="listview">
+<%
+						for (i = 0; i < vUniverse.NonLiveEventCount; i++){
+%>						
+						<li><a href="/frcts/events/@@vUniverse.NonLiveEvents[i].Location?@@M_VIEW_REQUEST">@@vUniverse.NonLiveEvents[i].Location</a></li>
+<%
+						}
+%>						
+					</ul>
+			</div>	
+
+	</div><!-- /content -->
+
+<%
+	m_RenderFooter()
+%>
+
+	</div><!-- /page -->
+	
+<%
+}
+//Resource: /events?View=HelpOut-->
+Debug("Interpreting the Render Events View Help Out Page Function");
+function m_RenderEventsViewHelpOut(){ 
+	Universe vUniverse = Universe();
+	vUniverse.GetLiveEvents();
+	vUniverse.GetNonLiveEvents();
+	vUniverse.GetLiveEventCount();
+	vUniverse.GetNonLiveEventCount();
+%>
+
+	<!--TODO make header bar into a function-->
+	<div data-role="page" id="eventlist" class="type-interior">
+<%
+	m_RenderToolbar("Pick Your Event");
+%>
+	<div data-role="content">
+<%
+	m_RenderSearchBrowser();
+%>	
+		<div class="content-primary">	
+				
+<%
+				if (vUniverse.LiveEventCount == 0){
+%>				
+				<h2>No Live Events</h2>
+<%
+				}
+				else {				
+%>
+				<h2>Live Events</h2>
+<%
+				}
+%>				
+					<ul data-role="listview" data-inset="true" data-theme="e" >
+<%
+					for (i = 0; i < vUniverse.LiveEventCount; i++){
+%>						
+						<li>
+							<a href="/frcts/events/@@vUniverse.LiveEvents[i].Location?@@M_VIEW_HELPOUT" data-prefetch>
+							@@vUniverse.LiveEvents[i].Location 
+<%
+							if (vUniverse.LiveEvents[i].OpenIssueCount > 0){
+%>							
+							<span class="ui-li-count">@@vUniverse.LiveEvents[i].OpenIssueCount</span>
+<%
+							}
+							else {}
+%>							
+							
+							
+							</a>
+						</li>
+<%
+					}
+%>						
+					</ul>
+		</div><!--/content-primary -->		
+		<div class="content-secondary">
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="c" data-content-theme="c">
+
+					<h3>All other events</h3>
+
+					<ul data-role="listview">
+<%
+						for (i = 0; i < vUniverse.NonLiveEventCount; i++){
+%>						
+						<li><a href="/frcts/events/@@vUniverse.NonLiveEvents[i].Location?@@M_VIEW_HELPOUT">@@vUniverse.NonLiveEvents[i].Location</a></li>
+<%
+						}
+%>
+					</ul>
+			</div>
+		</div><!--/content-secondary"-->		
+<%
+	m_RenderFooter();
+%>
+	</div><!-- /content -->
+	</div><!-- /page -->
+
+<%
+}
+//Resource: /events/:event?View=HelpOut
+Debug("Interpreting the Render Event/:event View Help Out Page Function");
+function m_RenderSingleEventViewHelpOut(){ //add this function
+	Event vEvent = Event();
+	vEvent.GetLocation();
+	vEvent.GetTeams();
+	vEvent.GetTeamCount();
+	vEvent.GetRequests();
+	vEvent.GetRequestCount();
+	vEvent.GetClosedRequestCount();
+	vEvent.GetClosedRequests();
+%>	
+<div data-role="page" class="type-interior">	
+<%
+	m_RenderToolbar(vEvent.Location);
+%>
+	<div data-role="content">
+	
+<%
+	m_RenderSearchBrowser();
+%>	
+	<div class="content-primary">	
+		<ul data-role="listview" data-inset="true" data-theme="c" data-divider-theme="e" data-filter="true" data-filter-placeholder="Search teams..." data-filter-theme="c">
+			<li data-role="list-divider">Teams with Requests</li>
+<%
+			for (i = 0; i < vEvent.RequestCount; i++){
+%>			
+			<li><a href="/frcts/requests/@@vEvent.Requests[i].UniqueId">
+				<p><strong>Team @@vEvent.Requests[i].Team</strong></p>
+				<p>@@vEvent.Requests[i].Description</p>									
+			</a></li>
+<%
+			}
+%>			
+			<li data-role="list-divider">All @@vEvent.Location Teams</li>
+<%
+			for (i = 0; i < vEvent.TeamCount; i++){
+%>			
+			<li><a href="/frcts/Teams/@@vEvent.Teams[i].UniqueId">@@vEvent.Teams[i].Number</a></li>
+<%
+			}
+%>
+		</ul>
+	</div><!--/content-priamry>-->
+	
+	<div class="content-secondary">
+	<div data-role="collapsible" data-collapsed="true" data-theme="c" data-content-theme="c">
+		<h3>Closed Requests</h3>
+		<ul data-role="listview">
+<%
+			for (i = 0; i < vEvent.ClosedRequestCount; i++){
+%>			
+			<li><a href="/frcts/requests/@@vEvent.ClosedRequests[i].UniqueId">
+				<p><strong>Team @@vEvent.ClosedRequests[i].Team</strong></p>
+				<p>@@vEvent.ClosedRequests[i].Description</p>									
+			</a></li>
+<%
+			}
+%>			
+		</ul>
+	</div><!--collapsible-->	
+	</div><!--content-secondary-->
+<%
+	m_RenderFooter();
+%>
+	</div><!-- /content -->
+</div><!--page-->	
+
+<%
+}
+//Resource: /events/:event?View=Request
+Debug("Interpreting the Render Event/:event View Help Out Page Function");
+function m_RenderSingleEventViewRequest(){ 
+	Event vEvent = Event();
+	vEvent.GetLocation();
+	vEvent.GetTeamCount();
+	vEvent.GetTeams();
+	vEvent.GetLocation();
+%>	
+	<div data-role="page" class="type-interior" >	
+<%
+	m_RenderToolbar(vEvent.Location);
+%>
+
+		<div data-role="content">
+<%
+	m_RenderSearchBrowser();
+%>		
+			<div class="content-primary">
+				<form name="RequestForm" id="RequestForm" action="/frcts/requests" method="POST">
+					<fieldset>	
+						<div data-role="fieldcontainer">
+							<label for="select-choice-0" class="select">Select Team:</label>
+							<select name="select-choice-0" id="select-choice-0">
+<%
+								for (i = 0; i < vEvent.TeamCount; i++){
+%>							
+							   <option value="@@vEvent.Teams[i].UniqueId">@@vEvent.Teams[i].Number</option>
+<%
+								}
+%>							   
+							</select>
+							<label for="textarea-a">Describe your request:</label>
+							<textarea name="RequestText" id="textarea-a"></textarea>
+							<input type="hidden" name="EventName" id="EventName" value="@@vEvent.Location" />
+						</div>
+					<button type="submit" data-theme="e" name="submit" value="submit-value">Submit</button>
+					</fieldset>
+				</form>	
+
+			</div><!--/content-primary -->	
+		</div><!-- /content -->
+
+<%
+	m_RenderFooter();
+%>
+
+	</div><!-- /page -->
+
+
+<%
+}
+/** Render Request Page ****************************************************
+ *	Uses the following ESP Variables:
+ *		Team, RequestNumber, Description, Status, OpenDate, LastUpdate, CloseDate
+ *		CommentCount, Comment[i], 
+ ***************************************************************************/
+ Debug("Interpreting the Render Request Function");
+function m_RenderRequestPage(){
+Debug("Entered RenderRequestPage function");	
+	var vRequest = Request();
+	vRequest.Get();
+	var vTeam = Team();
+	var vTeam = vTeam.Get();
+	var vAlert = "";
+	var vCommentCollapse = "";
+	var vCommentHeader = "";
+	var vEventButton = vTeam.Event;
+	
+	if (vRequest.CommentCount > 0){
+		vCommentCollapse = "collapsible"
+		vCommentHeader = "Comments"
+	}
+	if (vEventButton == undefined){  //comparing to undefined since this is the value if Team.Event is not given a value in the GetEvent function.  Undefined is different than an empty string. 
+		vEventButton = "All Events";
+	}
+%>
+
+	<div data-role="page" class="type-interior">
+<%
+	m_RenderToolbar("View Request");
+%>		
+	<div data-role="content">
+<%
+	m_RenderSearchBrowser();
+%>	
+		<div class="content-primary">	
+			<div class="ui-body">
+				<a href="/frcts/events/@@vTeam.Event?View=HelpOut" data-role="button" data-icon="arrow-l" data-inline="true" data-mini="true" data-theme="e">@@vEventButton</a>
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="height:80px">
+						<h3>Request @@vRequest.UniqueId
+						</h3>
+					</div>
+					<div class="ui-block-b"style="height:80px">
+						<h4>@@vRequest.OpenDate
+						</h4>
+						
+					</div>
+				</div>
+				<div>
+					<a style="float:right" href="#deleteRequest" data-rel="popup" data-role="button" data-theme="d" data-icon="delete" data-iconpos="notext">Delete</a>
+					<p>@@vRequest.Description
+					</p>
+				</div>
+			</div>	
+			<div data-role="@@vCommentCollapse" data-collapsed="false" data-theme="c" data-content-theme="e">
+				<h3>@@vCommentHeader</h3>				
+				<ul data-role="listview" data-theme="c" data-divider-theme="e">
+<%
+				for (i = 0; i < vRequest.CommentCount; i++){
+					if (vRequest.Comments[i].IsSolution == 1){
+%>
+					<li data-theme="e">
+<%
+					}
+					else {
+%>					
+					<li>
+<%
+					}
+%>					
+							<h3>@@vRequest.Comments[i].Author</h3>
+							<p style="white-space:normal">@@vRequest.Comments[i].Text</p>
+<%
+							if (vRequest.Comments[i].IsSolution == 1){ 
+%>							
+							<p class="ui-li-aside"><strong>Solution!</strong></p>
+							<div>
+								<form action="/frcts/requests/@@vRequest.UniqueId?Action=Unmark" method="put">
+									<button type="submit" data-icon="minus" data-iconpos="notext" data-theme="f">Unmark as Solution</button>
+									<input type="hidden" name="CommentUniqueId" value="@@vRequest.Comments[i].UniqueId"/>
+								</form>	
+							</div>
+<%
+							}
+							else {
+%>		
+							<p class="ui-li-aside">							
+								<a style="float:right" href="#@@vRequest.Comments[i].UniqueId" data-rel="popup" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a></a>
+							</p>
+							<div>
+								<form action="/frcts/requests/@@vRequest.UniqueId?Action=Mark" method="put">
+									<button data-theme="f" type="submit" data-icon="check" data-iconpos="notext">Mark as Solution</button>
+									<input type="hidden" name="CommentUniqueId" value="@@vRequest.Comments[i].UniqueId"/>
+								</form>	
+							</div>
+							<div data-role="popup" id="@@vRequest.Comments[i].UniqueId" class="ui-body" data-overlay-theme="a">
+								<h4>Delete this comment?</h4>
+								<form action="/frcts/requests/@@vRequest.UniqueId?Action=Delete" method="put" >
+									<a href="#" data-role="button" data-inline="true" data-mini="true" data-rel="back">Cancel</a>
+									<button type="submit" data-inline="true" data-mini="true" data-theme="e">Delete</button>
+									<input type="hidden" name="CommentUniqueId" value="@@vRequest.Comments[i].UniqueId"/>						
+								</form>	
+							</div><!--/popup-->	
+<%
+							}
+%>							
+					</li>
+<%
+				}
+%>					
+				</ul>				
+			</div><!--/collapsible comments-->
+			<!--<div class="ui-body">-->
+				<a href="#addComment" data-rel="popup" data-role="button" data-theme="e">Add Comment</a>
+			<!--</div>-->
+			<div data-role="popup" id="addComment" class="ui-body" data-overlay-theme="a">
+				<h3>Add Comment</h3>
+				<form action="/frcts/requests/@@vRequest.UniqueId?Action=AddComment" method="put">
+				<fieldset>	
+					<div data-role="fieldcontainer">
+						<label for="AuthorField" class="ui-hidden-accessible">Your Name:</label>
+						<input type="text" id= "AuthorField" name="AuthorField" value="" placeholder="Your Name"/>
+						<textarea name="CommentText" id="textarea-c" cols="50"></textarea>
+					</div>
+				<button type="submit" data-theme="e" name="submit" value="submit-value">Submit</button>
+				</fieldset>
+				</form>	
+			</div><!--/popup-->
+			
+			<div data-role="popup" id="deleteRequest" class="ui-body" data-overlay-theme="a">
+					<h4>Delete this request?</h4>
+					<form action="/frcts/requests/@@vRequest.UniqueId" method="delete" >
+						<a href="#" data-role="button" data-inline="true" data-mini="true" data-rel="back">Cancel</a>
+						<button type="submit" data-inline="true" data-mini="true" data-theme="e">Delete</button>				
+					</form>	
+				</div><!--/popup-->
+		</div><!--/content-primary -->		
+
+		<div class="content-secondary">
+			<a href="/frcts/teams/@@vTeam.UniqueId" data-role="button"  data-icon="arrow-r" data-iconpos="right">@@vTeam.Number Team Data</a>			
+		</div>	<!--content secondary-->
+
+	</div><!-- /content -->
+
+<%
+	m_RenderFooter()
+%>
+
+	</div><!-- /page -->
+	
+<%
+}
+
+Debug("Interpreting the Render Team Search Page Function");
+function m_RenderTeamSearch(){
+	vEvent = Event();
+	vEvent.GetTeams();
+	vEvent.GetTeamCount();
+	vEvent.GetNotFoundStatus();
+%>	
+<div data-role="page">	
+<%
+	m_RenderToolbar("Pick Your Team");
+%>
+	<div data-role="content">
+<%
+	m_RenderSearchBrowser();
+	if (vEvent.NotFoundStatus == 1){
+%>	
+	<h1>Not Found</h1>
+<%
+	}
+	else {
+%>	
+		
+		<ul data-role="listview" data-inset="true" data-theme="c" data-divider-theme="e" data-filter="true" data-filter-placeholder="Filter..." data-filter-theme="c">
+			<li data-role="list-divider">@@vSearchBrowser.SoftwareSelection, @@vSearchBrowser.EventSelection</li>
+<%
+			for (i = 0; i < vEvent.TeamCount; i++){
+%>			
+			<li><a href="/frcts/Teams/@@vEvent.Teams[i].UniqueId">@@vEvent.Teams[i].Number</a></li>
+<%
+			}
+%>
+		</ul>
+		
+<%
+	}
+	m_RenderFooter();
+%>
+	</div><!-- /content -->
+</div><!--page-->	
+	
+<%
+}
+
+Debug("Interpreting the Render Reports Page Function");
+function m_RenderReportsPage(){
+	vReportUniverse = ReportUniverse();
+	vReportUniverse.Get();
+%>
+
+<body>
+<%
+for (i = 0; i < vReportUniverse.PieChartCount; i++){
+%>
+<script>
+$(function () {
+	var chart;
+	$(document).ready(function() {
+		chart = new Highcharts.Chart({
+			legend : {
+				enabled : 'true'
+			},
+			chart: {
+				renderTo: '@@vReportUniverse.PieCharts[i].Location',
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false,
+				borderColor: "#D3D3D3",
+				borderRadius: 5,
+				borderWidth: 2
+			},
+			title: {
+				text: '@@vReportUniverse.PieCharts[i].Location Software Usage'
+			},
+			subtitle: {
+				text: '@@vReportUniverse.PieCharts[i].TeamsReporting of @@vReportUniverse.PieCharts[i].TeamCount Teams Reporting'
+			},
+			tooltip: {
+				pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+				percentageDecimals: 1
+			},
+		   plotOptions: {
+				pie: {
+					//enableMouseTracking: false
+					allowPointSelect: false,
+					cursor: 'pointer',
+					dataLabels: {
+						enabled: false,
+						color: '#000000',
+						connectorColor: '#000000',
+						formatter: function() {
+							return '<b>'+ this.point.name;
+						}
+					}
+				}
+			},
+			series: [{
+				type: 'pie',
+				name: 'Software',
+				data: [
+				
+					['LabVIEW',   	@@vReportUniverse.PieCharts[i].LVPercent ],
+					['C++',       	@@vReportUniverse.PieCharts[i].CppPercent ],
+					['Java',   		@@vReportUniverse.PieCharts[i].JavaPercent ],
+					['Other',    	@@vReportUniverse.PieCharts[i].OtherPercent ],
+				]
+			}]
+		});
+	});
+	
+});
+</script> <!--end pie chart-->
+<%
+}
+%>
+<!--<script>								--Commenting out chart code until we fix backend bug
+$(function () {
+	var chart = new Highcharts.Chart({
+		chart: {
+			renderTo: 'container2',
+			defaultSeriesType: 'line',
+			zoomType: '',
+			spacingTop: 50,
+			spacingBottom: 5,
+			spacingLeft: 5,
+			borderColor: "#D3D3D3",
+			borderRadius: 5,
+			borderWidth: 2
+		},
+		legend: {
+			enabled: false
+		},
+		subtitle: {
+			text: null
+		},
+		credits: {
+			text: null
+		},
+		title: {
+			text: 'Requests per Hour'
+		},
+		xAxis: {
+			type: 'datetime',
+			dateTimeLabelFormats: {
+				day: '%e. %b',
+				week: '%e. %b',
+				month: '%Y-%m',
+				year: '%Y'
+			}
+		},
+		yAxis: {
+			zoomEnabled: false,
+			endOnTick: false,
+			startOnTick: false,
+			minPadding: 0,
+			title : {
+				text : 'Requests Per Hour'
+				}
+		},
+		tooltip: {
+			shared: true,
+			enabled: true,
+			dateTimeLabelFormats: { 
+				millisecond: '%e. %b, %H:%M:%S.%L',
+				second: '%e. %b, %H:%M:%S',
+				minute: '%e. %b, %H:%M',
+				hour: '%e. %b, %H:%M',
+				day: '%e. %b, %Y',
+				week: 'Week from %e. %b, %Y',
+				month: '%B %Y',
+				year: '%Y'
+			},
+			headerFormat: '<span>{point.key}</span><br/>',
+			pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+			borderWidth: 1,
+			crosshairs: {
+				width: 2,
+				color: 'gray',
+				dashStyle: 'shortdot'
+			}
+		},
+		plotOptions: {
+			series: {
+				pointStart: Date.UTC(@@vReportUniverse.LineCharts[0].StartDate),
+				pointInterval: 3600000, // one hour
+			},
+			spline: {
+				enableMouseTracking: true,
+				marker: {
+					enabled: false,
+					states: {
+						hover: {
+							enabled: true
+						}
+					}
+				}
+			}
+		},
+		navigator: {
+			enabled: false
+		},
+		scrollbar: {
+			enabled: false
+		},
+		series: [
+<%
+		for (i = 0; i < vReportUniverse.LineChartCount; i++){
+%>		
+		{
+			name: '@@vReportUniverse.LineCharts[i].Location',
+			data: [ @@vReportUniverse.LineCharts[i].RequestsPerHour ]
+		}, 
+<%
+		}
+%>
+		]
+	});
+});
+</script> end line chart-->
+	<script>
+			$(function () {
+			var chart;
+			$(document).ready(function() {
+				chart = new Highcharts.Chart({
+					chart: {
+						renderTo: 'container3',
+						type: 'column',
+						borderColor: "#D3D3D3",
+						borderRadius: 5,
+						borderWidth: 2
+					},
+					title: {
+						text: 'Advanced Components'
+					},
+					xAxis: {
+						categories: ['CAN', 'Kinect', 'Vision']
+					},
+					yAxis: {
+						min: 0,
+						title: {
+							text: 'Number of Teams'
+						}
+					},
+					tooltip: {
+						formatter: function() {
+							return ''+
+								this.x +': '+ this.y;
+						}
+					},
+					plotOptions: {
+						column: {
+							pointPadding: 0.2,
+							borderWidth: 0
+						}
+					},
+						series: [{
+						colorByPoint: true,
+						showInLegend: false,
+						name: 'Advanced Components',
+						data: [ @@vReportUniverse.BarChart.CANValue, @@vReportUniverse.BarChart.KinectValue, @@vReportUniverse.BarChart.VisionValue ]
+			
+					},]
+				});
+			});
+			
+		});
+	</script> <!--end bar chart-->
+	<div data-role="page" class="type-interior">
+		
+<%
+	m_RenderToolbar("Reports");
+%>
+		
+		<div data-role="content">
+<%
+	m_RenderSearchBrowser();
+%>		
+			<div class="content-primary">
+				<div id="@@vReportUniverse.PieCharts[0].Location" style="min-width: 280px; height: 400px; margin: 5 5">
+				</div>
+				<div data-role="collapsible" data-collapsed="false" data-theme="e">
+					<h3>Live Events Software</h3>
+<%
+						for (i = 1; i < vReportUniverse.PieChartCount; i++){
+%>
+							<div id="@@vReportUniverse.PieCharts[i].Location" style="min-width: 280x; height: 400px; margin: 5 5">
+							</div>
+<%
+						}
+%>						
+				</div> <!--end collapsed pie charts-->
+				<!--<div id="container2" style="min-width: 280x; height: 400px; margin: 5 5">			
+				</div>-->
+				<div id="container3" style="min-width: 280x; height: 400px; margin: 5 5">
+				</div>
+				<a href="https://s3.amazonaws.com/protips.niparkway.com/NI+Parkway+Data+Report.xls" data-role="button" data-theme="c">Download Report</a>
+			</div> <!--content primary-->
+		
+		
+	</div> <!--content-->
+	
+<%
+	m_RenderFooter();
+%>
+	
+	</div> <!--page-->
+</body>
+
+<%
+}
+
+Debug("Interpreting the Render Notifications Page Function");
+function m_RenderNotificationsPage(){
+	vUniverse = Universe();
+	vUniverse.GetLiveEvents();
+	vUniverse.GetLiveEventCount();
+%>
+	<script type="text/javascript">
+		//Code Starts
+		function getParameterByName(name)
+		{
+		  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		  var regexS = "[\\?&]" + name + "=([^&#]*)";
+		  var regex = new RegExp(regexS);
+		  var results = regex.exec(window.location.search);
+		  if(results == null)
+		    return "";
+		  else
+		    return decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+		$(document).ready(function(){
+			var vAction = getParameterByName("action");
+
+			if (vAction == "success"){
+				$("#two").popup("open");
+			}
+			else {
+				$("#two").popup("close");
+			}
+		});
+	</script>
+	<div data-role="page" class="type-interior">
+<%
+	m_RenderToolbar("Notify Me");
+%>
+
+	<div data-role="content">
+<%
+	m_RenderSearchBrowser();
+%>	
+		<div class="content-primary">
+		<p><h3>Notification Preferences</h3></p>
+			<form action="/frcts/notifications" data-ajax="false" method="post">
+				<ul data-role="listview" data-inset="true" data-divider-theme="c">
+				<li data-role="fieldcontain" ">
+						<label for="name">Email Address:</label>
+						<input type="text" name="EmailAddress" id="name" value=""  />
+				</li>	
+			</ul>
+			<ul data-role="listview" data-inset="true">
+				<li data-role="fieldcontain">
+						<label for="name">Cell #:</label>
+						<input type="number" name="CellNumber" pattern="[0-9]*" id="number-pattern" value="" placeholder="15551234567"/>
+				</li>	
+			</ul>
+			<ul data-role="listview" data-inset="true" data-divider-theme="e">
+				<li data-role="list-divider">Live Events</li>
+<%
+				for (i = 0; i < vUniverse.LiveEventCount; i++){
+%>				
+				<li data-role="fieldcontain">
+					<label for="@@vUniverse.LiveEvents[i].Location">@@vUniverse.LiveEvents[i].Location</label>
+					<select name="@@vUniverse.LiveEvents[i].Location" id="@@vUniverse.LiveEvents[i].Location" data-role="slider">
+						<option value="false">Off</option>
+						<option value="true">On</option>
+					</select>
+				</li>
+<%
+				}
+%>
+		</ul>
+		<button type="submit" data-theme="c" name="submit" value="submit-value">Subscribe</button>
+		<div data-role="popup" name="two" id="two" data-theme="c" class="ui-content" data-overlay-theme="a">
+    		<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+		 	<h3>Request received!</h3>
+			<p>
+				You should receive a verification email or SMS shortly. If not please fill out the web form again. 
+			</p>
+		</div> <!--/popup-->
+		<p>
+			NI Parkway does not save users' cell phone numbers or email addresses. You will receive a verification email or SMS after subscribing. All users are automatically unsubscribed at the end of an event. You may unsubscribe at any time. Notifications are only sent when new requests are created.
+		</p>
+    	
+	</div><!--/content-primary -->		
+
+	<div class="content-secondary">
+	</div>
+		
+	</div><!-- /content -->
+
+<%
+	m_RenderFooter()
+%>
+
+</div>
+<%
+}
+%>
+	
+<!-- Main HTML -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+<% 
+			RenderHeader();
+%>
+	</head>
+	<body>
+<% 
+		Debug("Main HTML code");
+		if (vPageType == MOBILE){
+			
+			if (vPage == M_PG_HOME){
+				m_RenderHomePage();
+			}
+			else if (vPage == M_PG_TEAM){
+				m_RenderTeamPage();
+			}
+			else if (vPage == M_PG_EVENTS_VIEW_REQUESTS){
+				m_RenderEventsViewRequest();
+			}
+			else if (vPage == M_PG_EVENTS_VIEW_HELP_OUT){
+				m_RenderEventsViewHelpOut();
+			}
+			else if (vPage == M_PG_SINGLE_EVENT_VIEW_HELP_OUT){
+				m_RenderSingleEventViewHelpOut();
+			}
+			else if (vPage == M_PG_SINGLE_EVENT_VIEW_REQUEST){
+				m_RenderSingleEventViewRequest();
+			}
+			else if (vPage == M_PG_REQUEST){
+				m_RenderRequestPage();
+			}
+			else if (vPage == M_PG_TEAM_SEARCH){
+				m_RenderTeamSearch();
+			}
+			else if (vPage == M_PG_REPORT){
+				m_RenderReportsPage();
+			}
+			else if (vPage == M_PG_NOTIFICATIONS){
+				m_RenderNotificationsPage();
+			}
+			else{
+				RenderErrorMessage("Requested Unknown Page: " + vPage);
+			}
+		}	
+		else if (vPageType == DESKTOP){
+		}
+		else{
+			RenderErrorMessage("Requested Unknown Page Type: " + vPageType);
+		}
+	Debug("End of Main HTML Code");
+%>
+	</body>
+</html>

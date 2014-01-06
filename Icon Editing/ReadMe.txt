@@ -1,0 +1,1 @@
+In order for these templates and glyphs to be available in the LabVIEW icon editor, they must be placed in the LabVIEW Data folder.

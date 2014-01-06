@@ -1,0 +1,1 @@
+c:\program files\mysql....\bin\mysqldump.exe --user=root --password=sqlpass parkway > backup.sql
