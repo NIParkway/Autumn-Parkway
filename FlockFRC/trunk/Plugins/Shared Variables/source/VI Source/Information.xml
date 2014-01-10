@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<SV>
+  <Shared_Variables>
+    <Type>myType</Type>
+    <URL>myURL</URL>
+  </Shared_Variables>
+  <Shared_Variables>
+    <Type>myType2</Type>
+    <URL>myURL2</URL>
+  </Shared_Variables>
+</SV>

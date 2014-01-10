@@ -24,7 +24,7 @@
 		<Item Name="QR Add Queue .vi" Type="VI" URL="../Queue Registry/QR Add Queue .vi"/>
 		<Item Name="QR Get All Queues.vi" Type="VI" URL="../Queue Registry/QR Get All Queues.vi"/>
 		<Item Name="QR Get Queue .vi" Type="VI" URL="../Queue Registry/QR Get Queue .vi"/>
-		<Item Name="Queue Registry.vi" Type="VI" URL="../Queue Registry/Queue Registry.vi"/>
+		<Item Name="Queue Registry.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Queue Registry.vi"/>
 	</Item>
 	<Item Name="subVIs" Type="Folder">
 		<Item Name="TypeDefs" Type="Folder">
@@ -47,14 +47,14 @@
 		<Item Name="QMH Template (Windows CE).vi" Type="VI" URL="../Templates/QMH Template (Windows CE).vi"/>
 		<Item Name="QMH Template.vi" Type="VI" URL="../Templates/QMH Template.vi"/>
 	</Item>
-	<Item Name="Check Message Queue Status.vi" Type="VI" URL="../Check Message Queue Status.vi"/>
-	<Item Name="Create Message Queue.vi" Type="VI" URL="../Create Message Queue.vi"/>
+	<Item Name="Check Message Queue Status.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Check Message Queue Status.vi"/>
+	<Item Name="Create Message Queue.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Create Message Queue.vi"/>
 	<Item Name="Create Message.vi" Type="VI" URL="../Create Message.vi"/>
-	<Item Name="Destroy Message Queue.vi" Type="VI" URL="../Destroy Message Queue.vi"/>
-	<Item Name="Flush Message Queue.vi" Type="VI" URL="../Flush Message Queue.vi"/>
+	<Item Name="Destroy Message Queue.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Destroy Message Queue.vi"/>
+	<Item Name="Flush Message Queue.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Flush Message Queue.vi"/>
 	<Item Name="Read Next Message.vi" Type="VI" URL="../Read Next Message.vi"/>
 	<Item Name="Send Local Message.vi" Type="VI" URL="../Send Local Message.vi"/>
-	<Item Name="Send Local Messages.vi" Type="VI" URL="../Send Local Messages.vi"/>
+	<Item Name="Send Local Messages.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Send Local Messages.vi"/>
 	<Item Name="Send Message.vi" Type="VI" URL="../Send Message.vi"/>
 	<Item Name="Send Network Message.vi" Type="VI" URL="../Send Network Message.vi"/>
 </Library>
