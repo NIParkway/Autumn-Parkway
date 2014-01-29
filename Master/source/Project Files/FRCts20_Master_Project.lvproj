@@ -471,6 +471,12 @@
 				<Item Name="66C3F77FF012EA7E32BFF2D8FD223D69" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/66C3F77FF012EA7E32BFF2D8FD223D69"/>
 				<Item Name="15369F7224BF9B1810CB6703178EFABB" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/15369F7224BF9B1810CB6703178EFABB"/>
 				<Item Name="61C825BF9CB4CE08A69C8E7D1A948FEC" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/61C825BF9CB4CE08A69C8E7D1A948FEC"/>
+				<Item Name="Queue Registry Method.ctl" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Queue Registry Method.ctl"/>
+				<Item Name="Queue Registry Properties.ctl" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Queue Registry Properties.ctl"/>
+				<Item Name="Generate Error.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Generate Error.vi"/>
+				<Item Name="Create Multiple Messages.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Create Multiple Messages.vi"/>
+				<Item Name="Create Single Message.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Create Single Message.vi"/>
+				<Item Name="Add Queue To Registry.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Add Queue To Registry.vi"/>
 			</Item>
 			<Item Name="ws_runtime.dll" Type="Document" URL="ws_runtime.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
