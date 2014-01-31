@@ -464,13 +464,6 @@
 				<Item Name="66C3F77FF012EA7E32BFF2D8FD223D69" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/66C3F77FF012EA7E32BFF2D8FD223D69"/>
 				<Item Name="15369F7224BF9B1810CB6703178EFABB" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/15369F7224BF9B1810CB6703178EFABB"/>
 				<Item Name="61C825BF9CB4CE08A69C8E7D1A948FEC" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/61C825BF9CB4CE08A69C8E7D1A948FEC"/>
-				<Item Name="AMZ_S3_AWS Credentials.ctl" Type="VI" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/Typedefs/AMZ_S3_AWS Credentials.ctl"/>
-				<Item Name="AMZ_S3_API_POST Multipart Object Request Parameters.ctl" Type="VI" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/Typedefs/AMZ_S3_API_POST Multipart Object Request Parameters.ctl"/>
-				<Item Name="AMZ_S3_ACL.ctl" Type="VI" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/Typedefs/AMZ_S3_ACL.ctl"/>
-				<Item Name="AMZ_S3_Storage Class.ctl" Type="VI" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/Typedefs/AMZ_S3_Storage Class.ctl"/>
-				<Item Name="AMZ_S3_Object Metadata.ctl" Type="VI" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/Typedefs/AMZ_S3_Object Metadata.ctl"/>
-				<Item Name="Set AWS Credentials.vi" Type="VI" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/Support VIs/Set AWS Credentials.vi"/>
-				<Item Name="Put Object from file (Multipart).vi" Type="VI" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/API Calls/Object Operations/Put Object from file (Multipart).vi"/>
 				<Item Name="AWS_XML Parser.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/AWS Core Lib/VI Source/XML Parser/AWS_XML Parser.lvlib"/>
 				<Item Name="LabVIEWHTTPClient.lvlib" Type="Library" URL="/&lt;vilib&gt;/httpClient/LabVIEWHTTPClient.lvlib"/>
 				<Item Name="Path To Command Line String.vi" Type="VI" URL="/&lt;vilib&gt;/AdvancedString/Path To Command Line String.vi"/>
@@ -478,6 +471,8 @@
 				<Item Name="NI_SMTPEmail.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/SMTP/NI_SMTPEmail.lvlib"/>
 				<Item Name="AWS_SHA-1.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/AWS Core Lib/VI Source/SHA-1/AWS_SHA-1.lvlib"/>
 				<Item Name="LV Interface for Amazon S3.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/S3/vi source/LV Interface for Amazon S3.lvlib"/>
+				<Item Name="XML Parser.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/S3/vi source/XML Parser/XML Parser.lvlib"/>
+				<Item Name="SHA-1.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/S3/vi source/SHA-1/SHA-1.lvlib"/>
 			</Item>
 			<Item Name="ws_runtime.dll" Type="Document" URL="ws_runtime.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
@@ -496,29 +491,25 @@
 				<Property Name="Bld_buildSpecName" Type="Str">FRCts</Property>
 				<Property Name="Bld_excludeLibraryItems" Type="Bool">true</Property>
 				<Property Name="Bld_excludePolymorphicVIs" Type="Bool">true</Property>
-				<Property Name="Bld_localDestDir" Type="Path">/C/Users/Mark Black/Documents/GitHub/Autumn-Parkway/build</Property>
+				<Property Name="Bld_localDestDir" Type="Path">/C/Users/rcolby/Documents/GitHub/Autumn-Parkway/build</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{496DF8E1-F179-47EA-9471-E7E6D9F5BDF5}</Property>
 				<Property Name="Destination[0].destName" Type="Str">FRCts.lvws</Property>
-				<Property Name="Destination[0].path" Type="Path">/C/Users/Mark Black/Documents/GitHub/Autumn-Parkway/build/internal.llb</Property>
+				<Property Name="Destination[0].path" Type="Path">/C/Users/rcolby/Documents/GitHub/Autumn-Parkway/build/internal.llb</Property>
 				<Property Name="Destination[0].path.type" Type="Str">&lt;none&gt;</Property>
 				<Property Name="Destination[0].type" Type="Str">App</Property>
 				<Property Name="Destination[1].destName" Type="Str">Support Directory</Property>
-				<Property Name="Destination[1].path" Type="Path">/C/Users/Mark Black/Documents/GitHub/Autumn-Parkway/build/data</Property>
+				<Property Name="Destination[1].path" Type="Path">/C/Users/rcolby/Documents/GitHub/Autumn-Parkway/build/data</Property>
 				<Property Name="Destination[1].path.type" Type="Str">&lt;none&gt;</Property>
-				<Property Name="Destination[2].destName" Type="Str">web-app</Property>
-				<Property Name="Destination[2].path" Type="Path">/C/Users/mblack/test/mblack-harrypotter2-test/user/mblack/FRC Team Service/Trunk/2.0/Master/builds/mobile/web-app</Property>
+				<Property Name="Destination[2].destName" Type="Str">static</Property>
+				<Property Name="Destination[2].path" Type="Path">/C/Users/rcolby/Documents/GitHub/Autumn-Parkway/build/static</Property>
 				<Property Name="Destination[2].path.type" Type="Str">&lt;none&gt;</Property>
 				<Property Name="Destination[2].preserveHierarchy" Type="Bool">true</Property>
-				<Property Name="Destination[3].destName" Type="Str">static</Property>
-				<Property Name="Destination[3].path" Type="Path">/C/Users/Mark Black/Documents/GitHub/Autumn-Parkway/build/static</Property>
+				<Property Name="Destination[3].destName" Type="Str">ini</Property>
+				<Property Name="Destination[3].path" Type="Path">/C/Users/rcolby/Documents/GitHub/Autumn-Parkway/build</Property>
 				<Property Name="Destination[3].path.type" Type="Str">&lt;none&gt;</Property>
 				<Property Name="Destination[3].preserveHierarchy" Type="Bool">true</Property>
-				<Property Name="Destination[4].destName" Type="Str">ini</Property>
-				<Property Name="Destination[4].path" Type="Path">/C/Users/Mark Black/Documents/GitHub/Autumn-Parkway/build</Property>
-				<Property Name="Destination[4].path.type" Type="Str">&lt;none&gt;</Property>
-				<Property Name="Destination[4].preserveHierarchy" Type="Bool">true</Property>
-				<Property Name="DestinationCount" Type="Int">5</Property>
+				<Property Name="DestinationCount" Type="Int">4</Property>
 				<Property Name="RESTfulWebSrvc_routingTemplate[0].routingType" Type="Str">Static</Property>
 				<Property Name="RESTfulWebSrvc_routingTemplate[0].template" Type="Str">/static</Property>
 				<Property Name="RESTfulWebSrvc_routingTemplate[1].template" Type="Str">/home</Property>
@@ -563,11 +554,11 @@
 				<Property Name="RESTfulWebSrvc_routingTemplate[9].template" Type="Str">/requests</Property>
 				<Property Name="RESTfulWebSrvc_routingTemplate[9].VIName" Type="Str">FRCts20_WebMethods_Request_POST.vi</Property>
 				<Property Name="RESTfulWebSrvc_routingTemplateCount" Type="Int">17</Property>
-				<Property Name="Source[0].itemID" Type="Str">{B5590C97-82FE-445A-8E3F-29511E7909A0}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{6B2E17BB-986E-4F83-B0C4-F25F8A07B8AD}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].Container.applyDestination" Type="Bool">true</Property>
 				<Property Name="Source[1].Container.applyInclusion" Type="Bool">true</Property>
-				<Property Name="Source[1].destinationIndex" Type="Int">3</Property>
+				<Property Name="Source[1].destinationIndex" Type="Int">2</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/Static Source</Property>
 				<Property Name="Source[1].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[1].type" Type="Str">Container</Property>
