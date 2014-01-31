@@ -477,6 +477,7 @@
 				<Item Name="PathToUNIXPathString.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/CFURL.llb/PathToUNIXPathString.vi"/>
 				<Item Name="NI_SMTPEmail.lvlib" Type="Library" URL="/&lt;vilib&gt;/Utility/SMTP/NI_SMTPEmail.lvlib"/>
 				<Item Name="AWS_SHA-1.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/AWS Core Lib/VI Source/SHA-1/AWS_SHA-1.lvlib"/>
+				<Item Name="LV Interface for Amazon S3.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/S3/vi source/LV Interface for Amazon S3.lvlib"/>
 			</Item>
 			<Item Name="ws_runtime.dll" Type="Document" URL="ws_runtime.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
@@ -488,20 +489,6 @@
 			<Item Name="Strip Path__ogtk.vi" Type="VI" URL="../../../../Backend/source/VI Source/Dependencies/Strip Path__ogtk.vi"/>
 			<Item Name="Strip Path - Arrays__ogtk.vi" Type="VI" URL="../../../../Backend/source/VI Source/Dependencies/Strip Path - Arrays__ogtk.vi"/>
 			<Item Name="Strip Path - Traditional__ogtk.vi" Type="VI" URL="../../../../Backend/source/VI Source/Dependencies/Strip Path - Traditional__ogtk.vi"/>
-			<Item Name="Execute SQL Query with Rows.vi" Type="VI" URL="../../../../Backend/source/VI Source/Dependencies/Execute SQL Query with Rows.vi"/>
-			<Item Name="mysql_func_escape_sql.vi" Type="VI" URL="../../../../Backend/source/VI Source/Dependencies/mysql_func_escape_sql.vi"/>
-			<Item Name="FRCts20_WebMethods_ReadData_Competition.vi" Type="VI" URL="../../../../Web Methods/source/VI Source/FRCts20_WebMethods_ReadData_Competition.vi"/>
-			<Item Name="FRCts20_WebMethods_Redirect_Competition.vi" Type="VI" URL="../../../../Web Methods/source/VI Source/FRCts20_WebMethods_Redirect_Competition.vi"/>
-			<Item Name="Escape JSON String.vi" Type="VI" URL="../../../../Backend/source/VI Source/Escape JSON String.vi"/>
-			<Item Name="AWS Credentials.vi" Type="VI" URL="../../../../Backend/source/VI Source/AWS Credentials.vi"/>
-			<Item Name="FRCts20_Backend_SNS_ParsePhoneNumber.vi" Type="VI" URL="../../../../Backend/source/VI Source/FRCts20_Backend_SNS_ParsePhoneNumber.vi"/>
-			<Item Name="Message Credentials.ctl" Type="VI" URL="../../../../Utilities/source/VI Source/Mailgun/Message Credentials.ctl"/>
-			<Item Name="FRCts20_WebMethods_Convert_Teams.vi" Type="VI" URL="../../../../Web Methods/source/VI Source/Controls/Type Conversion/FRCts20_WebMethods_Convert_Teams.vi"/>
-			<Item Name="AWS_SNS.lvclass" Type="LVClass" URL="../../../../../../../Perforce/penguin_1666/mblack_PerforceWin/lvdotcom/source/aws-toolkit/r1/trunk/SNS/VI Source/AWS SNS Class/AWS_SNS.lvclass"/>
-			<Item Name="AWS_AWS Credentials.ctl" Type="VI" URL="../../../../../../../Perforce/penguin_1666/mblack_PerforceWin/lvdotcom/source/aws-toolkit/r1/trunk/AWS Core Lib/VI Source/Typedefs/AWS_AWS Credentials.ctl"/>
-			<Item Name="AWS_SNS Publish Parameters.ctl" Type="VI" URL="../../../../../../../Perforce/penguin_1666/mblack_PerforceWin/lvdotcom/source/aws-toolkit/r1/trunk/SNS/VI Source/Public Typedefs/AWS_SNS Publish Parameters.ctl"/>
-			<Item Name="AWS_SNS Subcribe Parameters.ctl" Type="VI" URL="../../../../../../../Perforce/penguin_1666/mblack_PerforceWin/lvdotcom/source/aws-toolkit/r1/trunk/SNS/VI Source/Public Typedefs/AWS_SNS Subcribe Parameters.ctl"/>
-			<Item Name="AWS_SNS Set Credentials.vi" Type="VI" URL="../../../../../../../Perforce/penguin_1666/mblack_PerforceWin/lvdotcom/source/aws-toolkit/r1/trunk/SNS/VI Source/AWS SNS Class/Utilities/AWS_SNS Set Credentials.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="FRCts" Type="RESTful WS">

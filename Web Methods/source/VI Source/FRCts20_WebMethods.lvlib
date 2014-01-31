@@ -118,7 +118,7 @@
 		<Item Name="FRCts20_WebMethods_Convert_Requests.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Requests.vi"/>
 		<Item Name="FRCts20_WebMethods_Convert_SingleEvent.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_SingleEvent.vi"/>
 		<Item Name="FRCts20_WebMethods_Convert_Team.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Team.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_Teams.vi" Type="VI" URL="../FRCts20_WebMethods_Convert_Teams.vi"/>
+		<Item Name="FRCts20_WebMethods_Convert_Teams.vi" Type="VI" URL="../Controls/Type Conversion/FRCts20_WebMethods_Convert_Teams.vi"/>
 	</Item>
 	<Item Name="Utilities" Type="Folder">
 		<Item Name="FRCts20_WebMethods_BackendError.vi" Type="VI" URL="../FRCts20_WebMethods_BackendError.vi"/>
@@ -136,7 +136,8 @@
 		<Item Name="FRCts20_WebMethods_Redirect_Division.vi" Type="VI" URL="../FRCts20_WebMethods_Redirect_Division.vi"/>
 		<Item Name="FRCts20_WebMethods_Redirect_Team.vi" Type="VI" URL="../FRCts20_WebMethods_Redirect_Team.vi"/>
 		<Item Name="FRCts20_WebMethods_EscapeHtmlBrackets.vi" Type="VI" URL="../FRCts20_WebMethods_EscapeHtmlBrackets.vi"/>
-		<Item Name="FRCts20_WebMethods_SendNotification.vi" Type="VI" URL="../FRCts20_WebMethods_SendNotification.vi"/>
+		<Item Name="FRCts20_WebMethods_Redirect_Competition.vi" Type="VI" URL="../FRCts20_WebMethods_Redirect_Competition.vi"/>
+		<Item Name="FRCts20_WebMethods_ReadData_Competition.vi" Type="VI" URL="../FRCts20_WebMethods_ReadData_Competition.vi"/>
 		<Item Name="FRCts20_WebMethods_WrongMethod.vi" Type="VI" URL="../FRCts20_WebMethods_WrongMethod.vi"/>
 	</Item>
 	<Item Name="Web Method Public Interface" Type="Folder">
