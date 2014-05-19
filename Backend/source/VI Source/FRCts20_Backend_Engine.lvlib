@@ -161,9 +161,9 @@
 		<Item Name="S3" Type="Folder">
 			<Item Name="FRCts20_Backend_Update_S3_API.vi" Type="VI" URL="../FRCts20_Backend_Update_S3_API.vi"/>
 		</Item>
-		<Item Name="FRCts20_Backend_ExecSql.vi" Type="VI" URL="../FRCts20_Backend_ExecSql.vi"/>
 	</Item>
 	<Item Name="Utility VIs" Type="Folder">
+		<Item Name="FRCts20_Backend_ExecSql.vi" Type="VI" URL="../FRCts20_Backend_ExecSql.vi"/>
 		<Item Name="FRCts20_WebMethods_S3Upload.vi" Type="VI" URL="../../../../Web Methods/source/VI Source/FRCts20_WebMethods_S3Upload.vi"/>
 		<Item Name="FRCts20_WebMethods_S3Upload2.vi" Type="VI" URL="../../../../Web Methods/source/VI Source/FRCts20_WebMethods_S3Upload2.vi"/>
 		<Item Name="FRCts20_Backend_Error_To_Status.vi" Type="VI" URL="../FRCts20_Backend_Error_To_Status.vi"/>
@@ -172,6 +172,11 @@
 		<Item Name="FRCts20_Backend_KeyGen.vi" Type="VI" URL="../FRCts20_Backend_KeyGen.vi"/>
 		<Item Name="FRCts20_Backend_BuildAppXMLPath.vi" Type="VI" URL="../FRCts20_Backend_BuildAppXMLPath.vi"/>
 		<Item Name="FRCts20_Backend_SaveTimer.vi" Type="VI" URL="../FRCts20_Backend_SaveTimer.vi"/>
+		<Item Name="Escape JSON String.vi" Type="VI" URL="../Escape JSON String.vi"/>
+		<Item Name="Execute SQL Query with Rows.vi" Type="VI" URL="../Dependencies/Execute SQL Query with Rows.vi"/>
+		<Item Name="mysql_func_escape_sql.vi" Type="VI" URL="../Dependencies/mysql_func_escape_sql.vi"/>
+		<Item Name="FRCts20_Backend_SNS_ParsePhoneNumber.vi" Type="VI" URL="../FRCts20_Backend_SNS_ParsePhoneNumber.vi"/>
+		<Item Name="AWS Credentials.vi" Type="VI" URL="../AWS Credentials.vi"/>
 		<Item Name="FRCts20_Backend_DateString_to_TimeStamp.vi" Type="VI" URL="../FRCts20_Backend_DateString_to_TimeStamp.vi"/>
 		<Item Name="FRCts20_Backend_INI Controller.lvclass" Type="LVClass" URL="../INI_Accessor/FRCts20_Backend_INI Controller.lvclass"/>
 	</Item>

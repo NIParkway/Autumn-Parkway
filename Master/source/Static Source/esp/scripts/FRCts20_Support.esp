@@ -1569,16 +1569,6 @@ function m_RenderTeamPage(){
 						</select> 
 						</li>
 					</ul>
-					<legend><h3>Updated for 2014?</h3></legend>
-					<ul data-role="listview" data-inset="true">
-						<li data-role="fieldcontain">
-							<label for="flip-1">Team Data</label>
-							<select name="flip-1" id="flip-1" data-role="slider">
-								<option value="true" selected>No</option>
-								<option value="false">Yes</option>
-							</select> 
-						</li>
-					</ul>
 					<button type="submit" data-theme="e" name="submit" value="submit-value">Update Data</button>
 				</form>	
 

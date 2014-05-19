@@ -54,7 +54,6 @@
 				</Item>
 			</Item>
 		</Item>
-		<Item Name="Control 1.ctl" Type="VI" URL="../../../../../../../../../Desktop/Control 1.ctl"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="1D Array to String__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/string/string.llb/1D Array to String__ogtk.vi"/>
@@ -414,7 +413,10 @@
 				<Item Name="A8A9DEFA75C1D73B5791235C182242E8" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/A8A9DEFA75C1D73B5791235C182242E8"/>
 				<Item Name="A888B2C93BAC937D892E129E45AE4208" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/A888B2C93BAC937D892E129E45AE4208"/>
 				<Item Name="AD3A56D4CED5CDCC9EFFDAEEED6AE79D" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/AD3A56D4CED5CDCC9EFFDAEEED6AE79D"/>
-				<Item Name="Add Queue To Registry.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Add Queue To Registry.vi"/>
+				<Item Name="AWS_Core.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/AWS Core Lib/VI Source/AWS_Core.lvlib"/>
+				<Item Name="AWS_SHA-1.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/AWS Core Lib/VI Source/SHA-1/AWS_SHA-1.lvlib"/>
+				<Item Name="AWS_SNS.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/SNS/VI Source/AWS_SNS.lvlib"/>
+				<Item Name="AWS_XML Parser.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/AWS Core Lib/VI Source/XML Parser/AWS_XML Parser.lvlib"/>
 				<Item Name="B1F2DBEE6B129DB5D3107E416C05FCBD" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/B1F2DBEE6B129DB5D3107E416C05FCBD"/>
 				<Item Name="B2715A80F7399F29959051992514396C" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/B2715A80F7399F29959051992514396C"/>
 				<Item Name="BuildHelpPath.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/BuildHelpPath.vi"/>
@@ -425,8 +427,6 @@
 				<Item Name="Check Special Tags.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Check Special Tags.vi"/>
 				<Item Name="Clear Errors.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Clear Errors.vi"/>
 				<Item Name="Convert property node font to graphics font.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Convert property node font to graphics font.vi"/>
-				<Item Name="Create Multiple Messages.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Create Multiple Messages.vi"/>
-				<Item Name="Create Single Message.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Create Single Message.vi"/>
 				<Item Name="D343F54611C90C26C00EC2E95E9B8AF7" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/D343F54611C90C26C00EC2E95E9B8AF7"/>
 				<Item Name="D908BF259F86ED052AA80C9D1A688BA2" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/D908BF259F86ED052AA80C9D1A688BA2"/>
 				<Item Name="D443311147EC877DFCD3AF56854E74AF" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/D443311147EC877DFCD3AF56854E74AF"/>
@@ -447,7 +447,6 @@
 				<Item Name="Format Message String.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Format Message String.vi"/>
 				<Item Name="General Error Handler CORE.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/General Error Handler CORE.vi"/>
 				<Item Name="General Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/General Error Handler.vi"/>
-				<Item Name="Generate Error.vi" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Generate Error.vi"/>
 				<Item Name="Get File Extension.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/libraryn.llb/Get File Extension.vi"/>
 				<Item Name="Get String Text Bounds.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Get String Text Bounds.vi"/>
 				<Item Name="Get System Directory.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/sysdir.llb/Get System Directory.vi"/>
@@ -460,7 +459,7 @@
 				<Item Name="LabVIEWHTTPClient.lvlib" Type="Library" URL="/&lt;vilib&gt;/httpClient/LabVIEWHTTPClient.lvlib"/>
 				<Item Name="List Directory and LLBs.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/libraryn.llb/List Directory and LLBs.vi"/>
 				<Item Name="Longest Line Length in Pixels.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Longest Line Length in Pixels.vi"/>
-				<Item Name="LV Interface for Amazon S3.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/LV Interface for Amazon S3.lvlib"/>
+				<Item Name="LV Interface for Amazon S3.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/S3/vi source/LV Interface for Amazon S3.lvlib"/>
 				<Item Name="LV70DateRecToTimeStamp.vi" Type="VI" URL="/&lt;vilib&gt;/_oldvers/_oldvers.llb/LV70DateRecToTimeStamp.vi"/>
 				<Item Name="LVBoundsTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVBoundsTypeDef.ctl"/>
 				<Item Name="LVDateTimeRec.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVDateTimeRec.ctl"/>
@@ -475,13 +474,11 @@
 				<Item Name="Path To Command Line String.vi" Type="VI" URL="/&lt;vilib&gt;/AdvancedString/Path To Command Line String.vi"/>
 				<Item Name="PathToUNIXPathString.vi" Type="VI" URL="/&lt;vilib&gt;/Platform/CFURL.llb/PathToUNIXPathString.vi"/>
 				<Item Name="PDA Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/PDA/PDA Error Handler.vi"/>
-				<Item Name="Queue Registry Method.ctl" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Queue Registry Method.ctl"/>
-				<Item Name="Queue Registry Properties.ctl" Type="VI" URL="/&lt;vilib&gt;/NI/AMC/Queue Registry Properties.ctl"/>
 				<Item Name="Recursive File List.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/libraryn.llb/Recursive File List.vi"/>
 				<Item Name="Search and Replace Pattern.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Search and Replace Pattern.vi"/>
 				<Item Name="Set Bold Text.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set Bold Text.vi"/>
 				<Item Name="Set String Value.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Set String Value.vi"/>
-				<Item Name="SHA-1.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/SHA-1/SHA-1.lvlib"/>
+				<Item Name="SHA-1.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/S3/vi source/SHA-1/SHA-1.lvlib"/>
 				<Item Name="Simple Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Simple Error Handler.vi"/>
 				<Item Name="Space Constant.vi" Type="VI" URL="/&lt;vilib&gt;/dlg_ctls.llb/Space Constant.vi"/>
 				<Item Name="System Directory Type.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/sysdir.llb/System Directory Type.ctl"/>
@@ -492,23 +489,12 @@
 				<Item Name="Tools_String.lvlib" Type="Library" URL="/&lt;vilib&gt;/NI/Tools/String/Tools_String.lvlib"/>
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
 				<Item Name="whitespace.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/whitespace.ctl"/>
-				<Item Name="XML Parser.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/LabVIEW Interface for Amazon S3/XML Parser/XML Parser.lvlib"/>
+				<Item Name="XML Parser.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/S3/vi source/XML Parser/XML Parser.lvlib"/>
 			</Item>
-			<Item Name="AWS Credentials.vi" Type="VI" URL="../../VI Source/AWS Credentials.vi"/>
-			<Item Name="AWS_Core.lvlib" Type="Library" URL="../../../../../../../Perforce/penguin_1666/mblack_PerforceWin/lvdotcom/source/aws-toolkit/r1/trunk/AWS Core Lib/VI Source/AWS_Core.lvlib"/>
-			<Item Name="AWS_SHA-1.lvlib" Type="Library" URL="../../../../../../../Perforce/penguin_1666/mblack_PerforceWin/lvdotcom/source/aws-toolkit/r1/trunk/AWS Core Lib/VI Source/SHA-1/AWS_SHA-1.lvlib"/>
-			<Item Name="AWS_SNS.lvlib" Type="Library" URL="../../../../../../../Perforce/penguin_1666/mblack_PerforceWin/lvdotcom/source/aws-toolkit/r1/trunk/SNS/VI Source/AWS_SNS.lvlib"/>
-			<Item Name="AWS_XML Parser.lvlib" Type="Library" URL="../../../../../../../Perforce/penguin_1666/mblack_PerforceWin/lvdotcom/source/aws-toolkit/r1/trunk/AWS Core Lib/VI Source/XML Parser/AWS_XML Parser.lvlib"/>
-			<Item Name="Escape JSON String.vi" Type="VI" URL="../../VI Source/Escape JSON String.vi"/>
 			<Item Name="FA_LocalStore.lvlib" Type="Library" URL="../../../../FlockFRC/trunk/FA_LocalStore API/source/VI Source/FA_LocalStore.lvlib"/>
 			<Item Name="FC_FIRST Client.lvlib" Type="Library" URL="../../../../FIRST Client/source/VI Source/FC_FIRST Client.lvlib"/>
-			<Item Name="FRCts20_Backend_SNS_ParsePhoneNumber.vi" Type="VI" URL="../../VI Source/FRCts20_Backend_SNS_ParsePhoneNumber.vi"/>
 			<Item Name="FRCts20_EspEngine.lvlib" Type="Library" URL="../../../../ESP Engine/source/VI Source/FRCts20_EspEngine.lvlib"/>
 			<Item Name="FRCts20_WebMethods.lvlib" Type="Library" URL="../../../../Web Methods/source/VI Source/FRCts20_WebMethods.lvlib"/>
-			<Item Name="FRCts20_WebMethods_Convert_Teams.vi" Type="VI" URL="../../../../Web Methods/source/VI Source/Controls/Type Conversion/FRCts20_WebMethods_Convert_Teams.vi"/>
-			<Item Name="FRCts20_WebMethods_ReadData_Competition.vi" Type="VI" URL="../../../../Web Methods/source/VI Source/FRCts20_WebMethods_ReadData_Competition.vi"/>
-			<Item Name="FRCts20_WebMethods_Redirect_Competition.vi" Type="VI" URL="../../../../Web Methods/source/VI Source/FRCts20_WebMethods_Redirect_Competition.vi"/>
-			<Item Name="Message Credentials.ctl" Type="VI" URL="../../../../Utilities/source/VI Source/Mailgun/Message Credentials.ctl"/>
 			<Item Name="ws_runtime.dll" Type="Document" URL="ws_runtime.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
