@@ -23,7 +23,6 @@
 				<Property Name="NI.DISK" Type="Bool">true</Property>
 			</Item>
 			<Item Name="FA_FIRST.lvlib" Type="Library" URL="../../../../FlockFRC/trunk/FA_FIRST API/FA_FIRST.lvlib"/>
-			<Item Name="FRCts20_Backend_API.lvlib" Type="Library" URL="../../VI Source/FRCts20_Backend_API/FRCts20_Backend_API.lvlib"/>
 			<Item Name="FRCts20_Backend_Engine.lvlib" Type="Library" URL="../../VI Source/FRCts20_Backend_Engine.lvlib"/>
 			<Item Name="FRCts20_Backend_TestCode.lvlib" Type="Library" URL="../../VI Source/TestCode/FRCts20_Backend_TestCode.lvlib"/>
 		</Item>

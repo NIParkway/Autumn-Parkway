@@ -477,7 +477,6 @@
 			<Item Name="AMC.lvlib" Type="Library" URL="../../../../Backend/source/VI Source/Dependencies/AMC/AMC.lvlib"/>
 			<Item Name="Current VIs Parent Directory__ogtk.vi" Type="VI" URL="../../../../Backend/source/VI Source/Dependencies/Current VIs Parent Directory__ogtk.vi"/>
 			<Item Name="Current VIs Parents Ref__ogtk.vi" Type="VI" URL="../../../../Backend/source/VI Source/Dependencies/Current VIs Parents Ref__ogtk.vi"/>
-			<Item Name="FRCts20_Backend_API.lvlib" Type="Library" URL="../../../../Backend/source/VI Source/FRCts20_Backend_API/FRCts20_Backend_API.lvlib"/>
 			<Item Name="FRCts20_Backend_Engine.lvlib" Type="Library" URL="../../../../Backend/source/VI Source/FRCts20_Backend_Engine.lvlib"/>
 			<Item Name="FRCts20_WebMethods.lvlib" Type="Library" URL="../../../../Web Methods/source/VI Source/FRCts20_WebMethods.lvlib"/>
 			<Item Name="Strip Path - Arrays__ogtk.vi" Type="VI" URL="../../../../Backend/source/VI Source/Dependencies/Strip Path - Arrays__ogtk.vi"/>
