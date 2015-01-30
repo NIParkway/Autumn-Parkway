@@ -460,7 +460,6 @@
 				<Item Name="Parse String with TDs__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Parse String with TDs__ogtk.vi"/>
 				<Item Name="Array of VData to VArray__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Array of VData to VArray__ogtk.vi"/>
 			</Item>
-			<Item Name="FRCts20_Backend_API.lvlib" Type="Library" URL="../../../../Backend/source/VI Source/FRCts20_Backend_API/FRCts20_Backend_API.lvlib"/>
 			<Item Name="FRCts20_Backend_Engine.lvlib" Type="Library" URL="../../../../Backend/source/VI Source/FRCts20_Backend_Engine.lvlib"/>
 			<Item Name="AMC.lvlib" Type="Library" URL="../../../../Backend/source/VI Source/Dependencies/AMC/AMC.lvlib"/>
 			<Item Name="Tools_KeyedArray.lvlib" Type="Library" URL="../../../../Backend/source/VI Source/Dependencies/Keyed Array/Tools_KeyedArray.lvlib"/>

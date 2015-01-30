@@ -67,7 +67,7 @@
 			</Item>
 			<Item Name="FRCts20_Backend_EventRoot_POST.vi" Type="VI" URL="../FRCts20_Backend_EventRoot_POST.vi"/>
 			<Item Name="FRCts20_Backend_EventRoot_GET.vi" Type="VI" URL="../FRCts20_Backend_EventRoot_GET.vi"/>
-			<Item Name="FRCts20_Backend_EventRoot_GETLive.vi" Type="VI" URL="../FRCts20_Backend_EventRoot_GETLive.vi"/>
+			<Item Name="_DEPRICATED FRCts20_Backend_EvezntRoot_GETLive.vi" Type="VI" URL="../_DEPRICATED FRCts20_Backend_EvezntRoot_GETLive.vi"/>
 		</Item>
 		<Item Name="Event" Type="Folder">
 			<Item Name="SubVIs" Type="Folder">
@@ -75,7 +75,7 @@
 				<Item Name="FRCts20_Backend_Event_PPD_return.vi" Type="VI" URL="../FRCts20_Backend_Event_PPD_return.vi"/>
 			</Item>
 			<Item Name="FRCts20_Backend_Event_GET.vi" Type="VI" URL="../FRCts20_Backend_Event_GET.vi"/>
-			<Item Name="FRCts20_Backend_Event_GETFiltered.vi" Type="VI" URL="../FRCts20_Backend_Event_GETFiltered.vi"/>
+			<Item Name="_Depricated FRCts20_Backend_Event_GETFiltered.vi" Type="VI" URL="../_Depricated FRCts20_Backend_Event_GETFiltered.vi"/>
 			<Item Name="FRCts20_Backend_Event_PUT.vi" Type="VI" URL="../FRCts20_Backend_Event_PUT.vi"/>
 			<Item Name="FRCts20_Backend_Event_DELETE.vi" Type="VI" URL="../FRCts20_Backend_Event_DELETE.vi"/>
 		</Item>
@@ -122,17 +122,17 @@
 				<Item Name="FRCts20_Backend_Comment_PD_reform.vi" Type="VI" URL="../FRCts20_Backend_Comment_PD_reform.vi"/>
 				<Item Name="FRCts20_Backend_Comment_GET_reform.vi" Type="VI" URL="../FRCts20_Backend_Comment_GET_reform.vi"/>
 			</Item>
+			<Item Name="Application" Type="Folder">
+				<Item Name="FRCts20_Backend_SaveXMLData.vi" Type="VI" URL="../FRCts20_Backend_SaveXMLData.vi"/>
+				<Item Name="FRCts20_Backend_Log_Warnings.vi" Type="VI" URL="../FRCts20_Backend_Log_Warnings.vi"/>
+				<Item Name="FRCts20_Backend_Ping_DB.vi" Type="VI" URL="../FRCts20_Backend_Ping_DB.vi"/>
+				<Item Name="backup.txt" Type="Document" URL="../FRCts20_Backend_API/backup.txt"/>
+				<Item Name="FRCts20_Backend_Revision_GET.vi" Type="VI" URL="../FRCts20_Backend_Revision_GET.vi"/>
+			</Item>
 			<Item Name="FRCts20_Backend_Comment_GET.vi" Type="VI" URL="../FRCts20_Backend_Comment_GET.vi"/>
 			<Item Name="FRCts20_Backend_Comment_POST.vi" Type="VI" URL="../FRCts20_Backend_Comment_POST.vi"/>
 			<Item Name="FRCts20_Backend_Comment_PUT.vi" Type="VI" URL="../FRCts20_Backend_Comment_PUT.vi"/>
 			<Item Name="FRCts20_Backend_Comment_DELETE.vi" Type="VI" URL="../FRCts20_Backend_Comment_DELETE.vi"/>
-		</Item>
-		<Item Name="Application" Type="Folder">
-			<Item Name="FRCts20_Backend_SaveXMLData.vi" Type="VI" URL="../FRCts20_Backend_SaveXMLData.vi"/>
-			<Item Name="FRCts20_Backend_Log_Warnings.vi" Type="VI" URL="../FRCts20_Backend_Log_Warnings.vi"/>
-			<Item Name="FRCts20_Backend_Ping_DB.vi" Type="VI" URL="../FRCts20_Backend_Ping_DB.vi"/>
-			<Item Name="backup.txt" Type="Document" URL="../FRCts20_Backend_API/backup.txt"/>
-			<Item Name="FRCts20_Backend_Revision_GET.vi" Type="VI" URL="../FRCts20_Backend_Revision_GET.vi"/>
 		</Item>
 		<Item Name="Stats" Type="Folder">
 			<Item Name="SubVIs" Type="Folder">
@@ -180,5 +180,6 @@
 		<Item Name="FRCts20_Backend_DateString_to_TimeStamp.vi" Type="VI" URL="../FRCts20_Backend_DateString_to_TimeStamp.vi"/>
 		<Item Name="FRCts20_Backend_INI Controller.lvclass" Type="LVClass" URL="../INI_Accessor/FRCts20_Backend_INI Controller.lvclass"/>
 	</Item>
+	<Item Name="FRCts20_Backend_API.lvlib" Type="Library" URL="../FRCts20_Backend_API/FRCts20_Backend_API.lvlib"/>
 	<Item Name="FRCts20_Backend_Processor.vi" Type="VI" URL="../FRCts20_Backend_Processor.vi"/>
 </Library>

@@ -61,9 +61,8 @@
 		</Item>
 		<Item Name="SingleTeam" Type="Folder">
 			<Item Name="Web Methods" Type="Folder">
-				<Item Name="FRCts20_WebMethods_Team_DELETE.vi" Type="VI" URL="../FRCts20_WebMethods_Team_DELETE.vi"/>
 				<Item Name="FRCts20_WebMethods_Team_GET.vi" Type="VI" URL="../FRCts20_WebMethods_Team_GET.vi"/>
-				<Item Name="FRCts20_WebMethods_Team_POST.vi" Type="VI" URL="../FRCts20_WebMethods_Team_POST.vi"/>
+				<Item Name="_DEPRICATED FRCts20_WebMethods_Team_POST.vi" Type="VI" URL="../_DEPRICATED FRCts20_WebMethods_Team_POST.vi"/>
 				<Item Name="FRCts20_WebMethods_Team_PUT.vi" Type="VI" URL="../FRCts20_WebMethods_Team_PUT.vi"/>
 			</Item>
 			<Item Name="FRCts20_WebMethods_ReadData_Team.vi" Type="VI" URL="../FRCts20_WebMethods_ReadData_Team.vi"/>
@@ -80,13 +79,13 @@
 			<Item Name="Web Methods" Type="Folder">
 				<Item Name="FRCts20_WebMethods_Request_PUT.vi" Type="VI" URL="../FRCts20_WebMethods_Request_PUT.vi"/>
 				<Item Name="FRCts20_WebMethods_Request_DELETE.vi" Type="VI" URL="../FRCts20_WebMethods_Request_DELETE.vi"/>
+				<Item Name="FRCts20_WebMethods_Single_Request_GET.vi" Type="VI" URL="../FRCts20_WebMethods_Single_Request_GET.vi"/>
 			</Item>
-			<Item Name="FRCts20_WebMethods_Single_Request_GET.vi" Type="VI" URL="../FRCts20_WebMethods_Single_Request_GET.vi"/>
 		</Item>
 		<Item Name="Notifications" Type="Folder">
 			<Item Name="Web Methods" Type="Folder">
-				<Item Name="FRCts20_WebMethods_Notifications_GET.vi" Type="VI" URL="../FRCts20_WebMethods_Notifications_GET.vi"/>
-				<Item Name="FRCts20_WebMethods_Notifications_PUT.vi" Type="VI" URL="../FRCts20_WebMethods_Notifications_PUT.vi"/>
+				<Item Name="_DEPIRCATED FRCts20_WebMethods_Notifications_GET.vi" Type="VI" URL="../_DEPIRCATED FRCts20_WebMethods_Notifications_GET.vi"/>
+				<Item Name="_DEPRICATED FRCts20_WebMethods_Notifications_PUT.vi" Type="VI" URL="../_DEPRICATED FRCts20_WebMethods_Notifications_PUT.vi"/>
 				<Item Name="FRCts20_WebMethods_Notifications_POST.vi" Type="VI" URL="../FRCts20_WebMethods_Notifications_POST.vi"/>
 			</Item>
 			<Item Name="FRCts20_WebMethods_Redirect_Notifications.vi" Type="VI" URL="../FRCts20_WebMethods_Redirect_Notifications.vi"/>
@@ -101,34 +100,10 @@
 			<Item Name="FRCts20_WebMethods_Redirect_Search.vi" Type="VI" URL="../FRCts20_WebMethods_Redirect_Search.vi"/>
 		</Item>
 	</Item>
-	<Item Name="Controls" Type="Folder">
-		<Item Name="FRCts20_WebMethods_ctl_requestarray.ctl" Type="VI" URL="../Controls/FRCts20_WebMethods_ctl_requestarray.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_returntype.ctl" Type="VI" URL="../Controls/FRCts20_WebMethods_ctl_returntype.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_teamarray.ctl" Type="VI" URL="../Controls/FRCts20_WebMethods_ctl_teamarray.ctl"/>
-		<Item Name="FRCts20_WebMethods_Globals.vi" Type="VI" URL="../Controls/FRCts20_WebMethods_Globals.vi"/>
-	</Item>
-	<Item Name="Type Conversion" Type="Folder">
-		<Item Name="ESPConversion.vi" Type="VI" URL="../Controls/Type Conversion/ESPConversion.vi"/>
-		<Item Name="FRCts20_Backend_Convert_Singlevent.vi" Type="VI" URL="../Controls/Type Conversion/FRCts20_Backend_Convert_Singlevent.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_Events.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Events.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_Events_PUT.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Events_PUT.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_Home.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Home.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_Notifications.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Notifications.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_Request.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Request.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_Requests.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Requests.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_SingleEvent.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_SingleEvent.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_Team.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Team.vi"/>
-		<Item Name="FRCts20_WebMethods_Convert_Teams.vi" Type="VI" URL="../FRCts20_WebMethods_Convert_Teams.vi"/>
-	</Item>
 	<Item Name="Utilities" Type="Folder">
 		<Item Name="FRCts20_WebMethods_BackendError.vi" Type="VI" URL="../FRCts20_WebMethods_BackendError.vi"/>
 		<Item Name="FRCts20_WebMethods_Cluster2Plain.vi" Type="VI" URL="../FRCts20_WebMethods_Cluster2Plain.vi"/>
 		<Item Name="FRCts20_WebMethods_ErrorHandler.vi" Type="VI" URL="../FRCts20_WebMethods_ErrorHandler.vi"/>
-		<Item Name="FRCts20_WebMethods_ESP_Request.vi" Type="VI" URL="../FRCts20_WebMethods_ESP_Request.vi"/>
-		<Item Name="FRCts20_WebMethods_ESP_RequestArray.vi" Type="VI" URL="../FRCts20_WebMethods_ESP_RequestArray.vi"/>
-		<Item Name="FRCts20_WebMethods_ESP_RequestForm.vi" Type="VI" URL="../FRCts20_WebMethods_ESP_RequestForm.vi"/>
-		<Item Name="FRCts20_WebMethods_ESP_Team.vi" Type="VI" URL="../FRCts20_WebMethods_ESP_Team.vi"/>
-		<Item Name="FRCts20_WebMethods_ESP_TeamArray.vi" Type="VI" URL="../FRCts20_WebMethods_ESP_TeamArray.vi"/>
 		<Item Name="FRCts20_WebMethods_GetSessionInfo.vi" Type="VI" URL="../FRCts20_WebMethods_GetSessionInfo.vi"/>
 		<Item Name="FRCts20_WebMethods_ReadData.vi" Type="VI" URL="../FRCts20_WebMethods_ReadData.vi"/>
 		<Item Name="FRCts20_WebMethods_ReadData_Division.vi" Type="VI" URL="../FRCts20_WebMethods_ReadData_Division.vi"/>
@@ -139,23 +114,44 @@
 		<Item Name="FRCts20_WebMethods_Redirect_Competition.vi" Type="VI" URL="../FRCts20_WebMethods_Redirect_Competition.vi"/>
 		<Item Name="FRCts20_WebMethods_ReadData_Competition.vi" Type="VI" URL="../FRCts20_WebMethods_ReadData_Competition.vi"/>
 		<Item Name="FRCts20_WebMethods_WrongMethod.vi" Type="VI" URL="../FRCts20_WebMethods_WrongMethod.vi"/>
-	</Item>
-	<Item Name="Web Method Public Interface" Type="Folder">
-		<Item Name="FRCts20_WebMethods_ctl_comment.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_comment.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_events.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_events.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_request.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_request.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_singleEvent.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_singleEvent.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_singleTeam.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_singleTeam.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_teamIdentifier.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_teamIdentifier.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_teamsingleTeam.ctl" Type="VI" URL="../Controls/FRCts20_WebMethods_ctl_teamsingleTeam.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_teamsingleTeamhelper.ctl" Type="VI" URL="../Controls/FRCts20_WebMethods_ctl_teamsingleTeamhelper.ctl"/>
-		<Item Name="FRCts20_WebMethods_ctl_teams.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_teams.ctl"/>
+		<Item Name="WriteJson.vi" Type="VI" URL="../WriteJson.vi"/>
 	</Item>
 	<Item Name="Deprecated" Type="Folder">
+		<Item Name="Web Method Public Interface" Type="Folder">
+			<Item Name="FRCts20_WebMethods_ctl_comment.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_comment.ctl"/>
+			<Item Name="FRCts20_WebMethods_ctl_events.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_events.ctl"/>
+			<Item Name="FRCts20_WebMethods_ctl_request.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_request.ctl"/>
+			<Item Name="FRCts20_WebMethods_ctl_singleEvent.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_singleEvent.ctl"/>
+			<Item Name="FRCts20_WebMethods_ctl_singleTeam.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_singleTeam.ctl"/>
+			<Item Name="FRCts20_WebMethods_ctl_teamIdentifier.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_teamIdentifier.ctl"/>
+			<Item Name="FRCts20_WebMethods_ctl_teams.ctl" Type="VI" URL="../Web Method Public Interface/FRCts20_WebMethods_ctl_teams.ctl"/>
+		</Item>
+		<Item Name="_Depricated Type Conversion" Type="Folder">
+			<Item Name="ESPConversion.vi" Type="VI" URL="../Controls/Type Conversion/ESPConversion.vi"/>
+			<Item Name="FRCts20_Backend_Convert_Singlevent.vi" Type="VI" URL="../Controls/Type Conversion/FRCts20_Backend_Convert_Singlevent.vi"/>
+			<Item Name="FRCts20_WebMethods_Convert_Events.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Events.vi"/>
+			<Item Name="FRCts20_WebMethods_Convert_Events_PUT.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Events_PUT.vi"/>
+			<Item Name="FRCts20_WebMethods_Convert_Home.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Home.vi"/>
+			<Item Name="FRCts20_WebMethods_Convert_Notifications.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Notifications.vi"/>
+			<Item Name="FRCts20_WebMethods_Convert_Request.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Request.vi"/>
+			<Item Name="FRCts20_WebMethods_Convert_Requests.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Requests.vi"/>
+			<Item Name="FRCts20_WebMethods_Convert_SingleEvent.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_SingleEvent.vi"/>
+			<Item Name="FRCts20_WebMethods_Convert_Team.vi" Type="VI" URL="../Type Conversion/FRCts20_WebMethods_Convert_Team.vi"/>
+			<Item Name="FRCts20_WebMethods_Convert_Teams.vi" Type="VI" URL="../FRCts20_WebMethods_Convert_Teams.vi"/>
+		</Item>
+		<Item Name="Controls" Type="Folder">
+			<Item Name="FRCts20_WebMethods_ctl_requestarray.ctl" Type="VI" URL="../Controls/FRCts20_WebMethods_ctl_requestarray.ctl"/>
+			<Item Name="FRCts20_WebMethods_ctl_returntype.ctl" Type="VI" URL="../Controls/FRCts20_WebMethods_ctl_returntype.ctl"/>
+			<Item Name="FRCts20_WebMethods_Globals.vi" Type="VI" URL="../Controls/FRCts20_WebMethods_Globals.vi"/>
+		</Item>
 		<Item Name="FRCts20_WebMethods_Events_DELETE.vi" Type="VI" URL="../FRCts20_WebMethods_Events_DELETE.vi"/>
 		<Item Name="FRCts20_WebMethods_Events_PUT.vi" Type="VI" URL="../FRCts20_WebMethods_Events_PUT.vi"/>
 		<Item Name="FRCts20_WebMethods_Team_PVT_bug.vi" Type="VI" URL="../FRCts20_WebMethods_Team_PVT_bug.vi"/>
+		<Item Name="_DEPRICATED FRCts20_WebMethods_SetupDebug.vi" Type="VI" URL="../_DEPRICATED FRCts20_WebMethods_SetupDebug.vi"/>
+		<Item Name="_DEPRICATED FRCts20_WebMethods_template.vit" Type="VI" URL="../_DEPRICATED FRCts20_WebMethods_template.vit"/>
+		<Item Name="FRCts20_WebMethods_ESP_Request.vi" Type="VI" URL="../FRCts20_WebMethods_ESP_Request.vi"/>
+		<Item Name="FRCts20_WebMethods_ESP_RequestArray.vi" Type="VI" URL="../FRCts20_WebMethods_ESP_RequestArray.vi"/>
+		<Item Name="FRCts20_WebMethods_ESP_RequestForm.vi" Type="VI" URL="../FRCts20_WebMethods_ESP_RequestForm.vi"/>
+		<Item Name="FRCts20_WebMethods_ESP_Team.vi" Type="VI" URL="../FRCts20_WebMethods_ESP_Team.vi"/>
 	</Item>
-	<Item Name="FRCts20_WebMethods_SetupDebug.vi" Type="VI" URL="../FRCts20_WebMethods_SetupDebug.vi"/>
-	<Item Name="FRCts20_WebMethods_template.vit" Type="VI" URL="../FRCts20_WebMethods_template.vit"/>
 </Library>

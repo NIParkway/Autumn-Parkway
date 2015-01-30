@@ -25,7 +25,6 @@
 		<Item Name="ESP Engine" Type="Folder">
 			<Item Name="FRCts20_EspEngine.lvlib" Type="Library" URL="../../../ESP Engine/source/VI Source/FRCts20_EspEngine.lvlib"/>
 		</Item>
-		<Item Name="FRCts20_Backend_API.lvlib" Type="Library" URL="../../../Backend/source/VI Source/FRCts20_Backend_API/FRCts20_Backend_API.lvlib"/>
 		<Item Name="FRCts20_Backend_Engine.lvlib" Type="Library" URL="../../../Backend/source/VI Source/FRCts20_Backend_Engine.lvlib"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
