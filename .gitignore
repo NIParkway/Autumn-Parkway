@@ -6,3 +6,6 @@ Backend/source/data/FRCts20_Backend_Config.ini
 Backend/source/data/FRCts20_Backend_Config.ini
 Backend/source/VI Source/AWS Credentials.vi
 Backend/source/data/FRCts20_Backend_Config.ini
+Backend/source/VI Source/AWS Credentials.vi
+build/FRCts.lvws
+Master/source/Project Files/FRCts20_Master_Project.aliases
