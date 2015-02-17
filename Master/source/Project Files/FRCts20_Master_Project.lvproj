@@ -411,7 +411,6 @@
 				<Item Name="SHA-1.lvlib" Type="Library" URL="/&lt;vilib&gt;/National Instruments/NI Amazon Web Services (AWS) Toolkit for LabVIEW/S3/vi source/SHA-1/SHA-1.lvlib"/>
 				<Item Name="General Error Handler Core CORE.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/General Error Handler Core CORE.vi"/>
 				<Item Name="LVRectTypeDef.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/miscctls.llb/LVRectTypeDef.ctl"/>
-				<Item Name="Tools_String.lvlib" Type="Library" URL="/&lt;vilib&gt;/NI/Tools/String/Tools_String.lvlib"/>
 				<Item Name="E3107912D9E55943948236499FCA76E6" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/E3107912D9E55943948236499FCA76E6"/>
 				<Item Name="B1F2DBEE6B129DB5D3107E416C05FCBD" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/B1F2DBEE6B129DB5D3107E416C05FCBD"/>
 				<Item Name="9E8D9C4508EB4B8A5D3721DFDDBA26C5" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/9E8D9C4508EB4B8A5D3721DFDDBA26C5"/>
@@ -474,6 +473,9 @@
 				<Item Name="784962B9C8EC9E9D4FD7BE5124C76CB5" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/784962B9C8EC9E9D4FD7BE5124C76CB5"/>
 				<Item Name="9AAEBC85B11F91EF712B0BC2152C19FF" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/9AAEBC85B11F91EF712B0BC2152C19FF"/>
 				<Item Name="61C825BF9CB4CE08A69C8E7D1A948FEC" Type="VI" URL="/&lt;vilib&gt;/addons/_JKI Toolkits/EasyXML/JKI_EasyXML.llb/61C825BF9CB4CE08A69C8E7D1A948FEC"/>
+				<Item Name="Get Case Matching.vi" Type="VI" URL="/&lt;vilib&gt;/NI/Tools/String/Get Case Matching.vi"/>
+				<Item Name="Match String with Wildcard Pattern List.vi" Type="VI" URL="/&lt;vilib&gt;/NI/Tools/String/Match String with Wildcard Pattern List.vi"/>
+				<Item Name="Match Wildcard Pattern String List.vi" Type="VI" URL="/&lt;vilib&gt;/NI/Tools/String/Match Wildcard Pattern String List.vi"/>
 			</Item>
 			<Item Name="ws_runtime.dll" Type="Document" URL="ws_runtime.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
