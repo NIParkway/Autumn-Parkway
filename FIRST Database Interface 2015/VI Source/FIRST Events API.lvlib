@@ -8,15 +8,23 @@
 
 </Property>
 	<Item Name="API" Type="Folder">
-		<Item Name="API Tester.vi" Type="VI" URL="../API Tester.vi"/>
+		<Item Name="GetEventAllianceSelection.vi" Type="VI" URL="../GetEventAllianceSelection.vi"/>
+		<Item Name="GetEventListings.vi" Type="VI" URL="../GetEventListings.vi"/>
+		<Item Name="GetSchedule.vi" Type="VI" URL="../GetSchedule.vi"/>
 		<Item Name="GetTeamListings.vi" Type="VI" URL="../GetTeamListings.vi"/>
 	</Item>
 	<Item Name="Controls" Type="Folder">
-		<Item Name="Event Alliances.ctl" Type="VI" URL="../Event Alliances.ctl"/>
-		<Item Name="FRC Events.ctl" Type="VI" URL="../FRC Events.ctl"/>
+		<Item Name="FRC API Selector.ctl" Type="VI" URL="../FRC API Selector.ctl"/>
+		<Item Name="FRC Event Alliances.ctl" Type="VI" URL="../FRC Event Alliances.ctl"/>
+		<Item Name="FRC Event Listings.ctl" Type="VI" URL="../FRC Event Listings.ctl"/>
+		<Item Name="FRC Schedule.ctl" Type="VI" URL="../FRC Schedule.ctl"/>
+		<Item Name="FRC Teams.ctl" Type="VI" URL="../FRC Teams.ctl"/>
 	</Item>
 	<Item Name="SubVIs" Type="Folder">
 		<Item Name="HTTP GET JSON.vi" Type="VI" URL="../HTTP GET JSON.vi"/>
+		<Item Name="Military to Standard Time.vi" Type="VI" URL="../Military to Standard Time.vi"/>
+		<Item Name="Parse FRC TimeStamp String.vi" Type="VI" URL="../Parse FRC TimeStamp String.vi"/>
+		<Item Name="Remove Termination.vi" Type="VI" URL="../Remove Termination.vi"/>
 		<Item Name="URL Generator.vi" Type="VI" URL="../URL Generator.vi"/>
 	</Item>
 </Library>
