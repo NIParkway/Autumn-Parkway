@@ -20,6 +20,11 @@
 		<Item Name="FRC Schedule.ctl" Type="VI" URL="../FRC Schedule.ctl"/>
 		<Item Name="FRC Teams.ctl" Type="VI" URL="../FRC Teams.ctl"/>
 	</Item>
+	<Item Name="PostToDatabase" Type="Folder">
+		<Item Name="PostAttendanceToDatabase.vi" Type="VI" URL="../PostAttendanceToDatabase.vi"/>
+		<Item Name="PostEventsToDatabase.vi" Type="VI" URL="../PostEventsToDatabase.vi"/>
+		<Item Name="PostTeamsToDatabase.vi" Type="VI" URL="../PostTeamsToDatabase.vi"/>
+	</Item>
 	<Item Name="SubVIs" Type="Folder">
 		<Item Name="HTTP GET JSON.vi" Type="VI" URL="../HTTP GET JSON.vi"/>
 		<Item Name="Military to Standard Time.vi" Type="VI" URL="../Military to Standard Time.vi"/>
@@ -27,4 +32,5 @@
 		<Item Name="Remove Termination.vi" Type="VI" URL="../Remove Termination.vi"/>
 		<Item Name="URL Generator.vi" Type="VI" URL="../URL Generator.vi"/>
 	</Item>
+	<Item Name="Populate Database.vi" Type="VI" URL="../Populate Database.vi"/>
 </Library>

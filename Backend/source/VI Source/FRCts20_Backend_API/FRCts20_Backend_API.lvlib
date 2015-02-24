@@ -81,6 +81,7 @@
 		<Item Name="FRCts20_Backend_API_Command_Stats.ctl" Type="VI" URL="../FRCts20_Backend_API_Command_Stats.ctl"/>
 		<Item Name="FRCts20_Backend_API_Command_Team.ctl" Type="VI" URL="../FRCts20_Backend_API_Command_Team.ctl"/>
 		<Item Name="FRCts20_Backend_API_Command_TeamRoot.ctl" Type="VI" URL="../FRCts20_Backend_API_Command_TeamRoot.ctl"/>
+		<Item Name="FRCts20_Backend_API.vi" Type="VI" URL="../FRCts20_Backend_API.vi"/>
 	</Item>
 	<Item Name="API Polymorphs" Type="Folder">
 		<Property Name="NI.SortType" Type="Int">3</Property>
@@ -97,5 +98,4 @@
 		<Item Name="FRCts20_Backend_API_SNS.vi" Type="VI" URL="../FRCts20_Backend_API_SNS.vi"/>
 		<Item Name="FRCts20_Backend_API_ClosedRequests.vi" Type="VI" URL="../FRCts20_Backend_API_ClosedRequests.vi"/>
 	</Item>
-	<Item Name="FRCts20_Backend_API.vi" Type="VI" URL="../FRCts20_Backend_API.vi"/>
 </Library>
